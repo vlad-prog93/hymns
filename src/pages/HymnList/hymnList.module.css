@@ -1,0 +1,42 @@
+.hymnList__list {
+
+  margin: 0 auto;
+  padding: 0 5px;
+
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  width: 100%;
+  font-size: 16px;
+
+  list-style-type: none;
+}
+
+.hymnList__title {
+  margin: 0;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.hymnList__Item {
+  padding: 10px;
+  border-bottom: 1px solid black;
+  transition: border .3 ease-in;
+}
+
+.hymnList__link {
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: black;
+  transition: color .3;
+
+  display: flex;
+  justify-content: space-between;
+  transition: color .3 ease-in;
+}
+
+.hymnList__link:hover {
+  color: rgb(241, 196, 15);
+}

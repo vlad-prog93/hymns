@@ -1,0 +1,23 @@
+.item {
+  padding: 10px;
+  border-bottom: 1px solid white;
+  transition: all .3 ease-in;
+}
+
+.link {
+  display: block;
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  transition: all .3 ease-in;
+}
+
+.item:hover {
+  border-bottom: 1px solid rgb(241, 196, 15);
+
+}
+
+.item:hover .link {
+  color: rgb(241, 196, 15);
+
+}
