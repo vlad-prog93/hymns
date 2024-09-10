@@ -1,12 +1,22 @@
+import { Link, useNavigate } from 'react-router-dom'
+
 // стили
 import style from './arrows.module.css'
 
 // redux
-import { useAppDispatch } from '../../redux/hooks'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { hymnsSlice } from '../../redux/reducers/HymnSlice'
+import { ROUTES } from '../../utils/routes'
+import { useEffect } from 'react'
 
 const Arrows = () => {
+  const { currentHymn } = useAppSelector(state => state.hymnReducer)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    navigate(ROUTES.home + ROUTES.hymns + currentHymn?.id)
+  }, [currentHymn])
 
   return (
     <div className={style.arrows}>
