@@ -5,8 +5,8 @@ export const stateSettingsFont: ISettingsFont = {
   fontSizeText: '14px',
   fontSizeAccord: '14px',
 
-  colorText: 'black',
-  colorAccord: 'black',
+  colorText: '#000000',
+  colorAccord: '#000000',
 
   setSettingsFont: (obj: ISettingsFont) => { }
 }
