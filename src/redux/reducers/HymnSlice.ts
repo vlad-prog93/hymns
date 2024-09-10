@@ -125,8 +125,7 @@ export const hymnsSlice = createSlice({
     // история
     getHistoryHymns(state) {
       const hymns = getHistoryHymnsLS()
-      hymns.sort((a, b) => b.time - a.time)
-      state.historyHymns = hymns
+      state.historyHymns = hymns.sort((a, b) => b.time - a.time)
     },
 
     addHistoryHymn(state, action: PayloadAction<IHistoryHymn>) {

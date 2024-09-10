@@ -1,0 +1,10 @@
+.setting {}
+
+.setting__fontSize {
+  display: flex;
+  flex-direction: column;
+}
+
+.setting__fontSize span {
+  margin: 20px auto;
+}
