@@ -22,7 +22,6 @@ const Hymn = () => {
 
   useEffect(() => {
     !currentHymn && navigate('/')
-
   }, [currentHymn, navigate])
 
   useEffect(() => {

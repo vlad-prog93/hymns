@@ -12,6 +12,8 @@ import { hymnsSlice } from "../../redux/reducers/HymnSlice"
 
 // models
 import { Transpose } from "../../models/hymns"
+import { Link } from "react-router-dom"
+import { ROUTES } from "../../utils/routes"
 
 function Header() {
   const { currentHymn, isTextWithAccord, favoriteHymns, isTranposeOpen } = useAppSelector(state => state.hymnReducer)
@@ -67,7 +69,7 @@ function Header() {
       <nav className={style.header__nav}>
         <ul className={style.header__list}>
           <li className={style.header__item}><Burger /></li>
-          <li className={style.header__item}><span>{currentHymn ? 'Гимн ' + currentHymn.number : 'Гимны'}</span></li>
+          <li className={style.header__item}><span>{currentHymn ? <Link className={style.header__link} to={ROUTES.home + ROUTES.hymns + currentHymn.id}>Гимн {currentHymn.number}</Link> : 'Гимны'}</span></li>
         </ul>
         {currentHymn &&
           <ul className={style.header__list}>

@@ -28,6 +28,11 @@
   margin: 0;
 }
 
+.header__link {
+  text-decoration: none;
+  color: #FFF;
+}
+
 .header__buttonSearch {
   border: none;
   background-image: url('../../assets/icons/search.png');
