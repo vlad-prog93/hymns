@@ -34,13 +34,9 @@ const Hymn = () => {
         dispatch(hymnsSlice.actions.prevHymn())
         return
       }
-
     }
-
     document.addEventListener('keyup', event)
     return () => document.removeEventListener('keyup', event)
-
-
   }, [navigate, dispatch])
 
   return (
