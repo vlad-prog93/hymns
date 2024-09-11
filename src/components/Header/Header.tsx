@@ -76,22 +76,26 @@ function Header() {
             {isTextWithAccord &&
               <li className={`${style.header__item} ${style.header__itemCheckbox}`}>
                 <input
-                  className={style.header__itemInputTranspose}
+                  className={style.header__itemInput}
                   defaultChecked={isTranposeOpen}
                   type="checkbox"
                   onChange={() => dispatch(hymnsSlice.actions.toggleTranposeMenu(!isTranposeOpen))} />
-                <span className={style.header__itemSpanTranspose} />
-                {isTranposeOpen &&
+                <span className={`${style.header__itemSpan} ${style.header__itemSpanTranspose}`} />
+                {/* {isTranposeOpen &&
                   <div className={style.header__transpose}>
                     <button className={style.header__transpose_btn} onClick={() => transposeAccords(Transpose.UP)}>+</button>
                     <button className={style.header__transpose_btn} onClick={() => transposeAccords(Transpose.DOWN)}>-</button>
-                  </div>}
+                  </div>} */}
               </li>}
             <li className={style.header__item}>
-              <button className={isCurrentHymnFavorite() ? style.header__buttonFavorite_active : style.header__buttonFavorite} onClick={toggleFavoriteHymn} />
+              <button
+                className={`${style.header__button} ${isCurrentHymnFavorite() ? style.header__buttonFavorite_active : style.header__buttonFavorite}`}
+                onClick={toggleFavoriteHymn} />
             </li>
             <li className={style.header__item}>
-              <button className={style.header__buttonSearch} onClick={returnToSearch} />
+              <button
+                className={`${style.header__button} ${style.header__buttonSearch}`}
+                onClick={returnToSearch} />
             </li>
             <li className={`${style.header__item} ${style.header__itemCheckbox}`}>
               <input
@@ -99,7 +103,7 @@ function Header() {
                 defaultChecked={isTextWithAccord}
                 type="checkbox"
                 onChange={() => dispatch(hymnsSlice.actions.toggleHymnText(!isTextWithAccord))} />
-              <span className={style.header__itemSpan} />
+              <span className={`${style.header__itemSpan} ${style.header__itemSpanAccord}`} />
             </li>
 
 
