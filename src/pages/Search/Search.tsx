@@ -42,6 +42,7 @@ const Search = () => {
 
     if (inputNumber) {
       hymn = hymns.find(hymn => hymn.number === inputNumber) || null
+      !hymn && dispatch(hymnsSlice.actions.setError('Гимн с таким номером не найден'))
     }
     if (hymn) {
       dispatch(hymnsSlice.actions.setCurrentHymn(hymn))
@@ -56,12 +57,15 @@ const Search = () => {
         const text = Object.keys(hymn.text).reduce((acc, res) => acc += hymn.text[res], '')
         return text.toLowerCase().indexOf(inputText.toLowerCase()) === -1 ? false : true
       })
+      !foundedHymns.length && dispatch(hymnsSlice.actions.setError('Гимнов не найдено'))
     }
     if (foundedHymns.length) {
       dispatch(hymnsSlice.actions.hymnsFounded(foundedHymns))
       navigate(ROUTES.foundedHymns)
       return
     }
+    setInputNumber(null)
+    setInputText('')
     dispatch(hymnsSlice.actions.deleteCurrentHymn())
     dispatch(hymnsSlice.actions.hymnsFounded([]))
     return

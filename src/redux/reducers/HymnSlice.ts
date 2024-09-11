@@ -61,6 +61,11 @@ export const hymnsSlice = createSlice({
       state.currentHymn = null
     },
 
+
+    setError(state, action: PayloadAction<string | null>) {
+      state.error = action.payload
+    },
+
     // установить избранные гимны, добавить в избранные, удалить из избранных
     setFavoriteHymnsList(state, action: PayloadAction<string[]>) {
       const far: IHymn[] = []

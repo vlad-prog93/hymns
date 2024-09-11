@@ -1,0 +1,19 @@
+.popup {
+  position: absolute;
+  top: calc(50% - 75px);
+  right: calc(50% - 150px);
+  border-radius: 10px;
+  width: 300px;
+  height: 150px;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3;
+}
+
+.popup__text {
+  font-size: 20px;
+  color: #FFF;
+  text-align: center;
+}
