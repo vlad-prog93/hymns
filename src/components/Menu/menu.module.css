@@ -1,16 +1,63 @@
 .menu {
   position: absolute;
   color: #FFF;
-  background-color: #000;
-  width: 25%;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
   height: calc(100% - 50px);
-  transition: all .1s;
+  transition: all .3s;
   top: 50px;
   left: -100%;
+  z-index: 4;
 }
 
 .menu_active {
   left: 0;
+}
+
+
+
+
+.menu__contain {
+  background-color: #000;
+  width: 30%;
+  height: 100%;
+
+  transition: all .7s;
+}
+
+@media screen and (max-width: 1025px) {
+  .menu__contain {
+    width: 40%;
+
+  }
+}
+
+@media screen and (max-width: 778px) {
+  .menu__contain {
+    width: 50%;
+
+  }
+}
+
+@media screen and (max-width: 525px) {
+  .menu__contain {
+    width: 100%;
+
+  }
+}
+
+.menu .menu__contain {
+  margin-left: 0;
+}
+
+.menu_active .menu__contain {
+  margin-left: 100px;
+}
+
+@media screen and (max-width: 1480px) {
+  .menu_active .menu__contain {
+    margin-left: 0;
+  }
 }
 
 .menu__list {

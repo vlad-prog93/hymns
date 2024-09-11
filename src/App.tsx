@@ -64,7 +64,7 @@ function App() {
           </Routes>
           <div className={isTranposeOpen && isTextWithAccord ? 'App__footer App__footer_active' : 'App__footer'}>
             {currentHymn && <Arrows />}
-            {isTranposeOpen && isTextWithAccord && <Transposes />}
+            {currentHymn && isTranposeOpen && isTextWithAccord && <Transposes />}
           </div>
         </div>
       </BrowserRouter>
