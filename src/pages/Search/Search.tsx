@@ -27,7 +27,11 @@ const Search = () => {
     setInputText(e.currentTarget.value)
   }
   const onChangeInputNumber: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setInputNumber(Number(e.currentTarget.value))
+    if (!e.target.value) {
+      setInputNumber(null)
+    } else {
+      setInputNumber(Number(e.currentTarget.value))
+    }
   }
 
   const toSearch = (e: any): void => {

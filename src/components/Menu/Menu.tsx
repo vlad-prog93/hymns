@@ -16,7 +16,7 @@ const Menu = () => {
   const { isMenuActive } = useAppSelector(state => state.menuReducer)
   const dispatch = useAppDispatch()
 
-  function hideMenu(e: any) {
+  function hideMenu() {
     dispatch(menuSlice.actions.toogleMenuActive(!isMenuActive))
   }
 

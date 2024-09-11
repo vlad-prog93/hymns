@@ -46,6 +46,12 @@
   transition: .3s all;
 }
 
+@media screen and (max-width: 525px) {
+  .search__button {
+    font-size: 14px;
+  }
+}
+
 .search__button:hover {
   background-color: #313131;
   color: var(--active-color);
