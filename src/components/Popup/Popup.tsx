@@ -12,7 +12,7 @@ const Popup = () => {
   useEffect(() => {
     setTimeout(() => {
       dispatch(hymnsSlice.actions.setError(null))
-    }, 1000)
+    }, 2000)
   }, [])
 
   return (

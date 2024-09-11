@@ -1,10 +1,10 @@
 .popup {
   position: absolute;
-  top: calc(50% - 75px);
+  top: calc(50% - 40px);
   right: calc(50% - 150px);
   border-radius: 10px;
   width: 300px;
-  height: 150px;
+  height: 80px;
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
