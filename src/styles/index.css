@@ -51,3 +51,18 @@ li {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.App__footer {
+  position: sticky;
+  bottom: 0;
+  padding: 0 5px;
+
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.App__footer_active {
+  background-color: rgba(200, 200, 200, 0.8);
+}

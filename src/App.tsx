@@ -28,10 +28,12 @@ import { getFavoriteHymnsLS } from './tools/storage';
 import Settings from './pages/Settings/Setting';
 
 // models
+import { Transpose } from "./models/hymns"
 import { ISettingsFont } from './models/settingsFont'
+import Transposes from './components/Transposes/Transposes';
 
 function App() {
-  const { hymns, isLoading, error, favoriteHymns, foundedHymns, currentHymn, historyHymns } = useAppSelector(state => state.hymnReducer)
+  const { hymns, isLoading, error, favoriteHymns, foundedHymns, currentHymn, historyHymns, isTranposeOpen, isTextWithAccord } = useAppSelector(state => state.hymnReducer)
   const dispatch = useAppDispatch()
 
   const [settingsFont, setSettingsFont] = useState<ISettingsFont>(stateSettingsFont)
@@ -41,6 +43,8 @@ function App() {
     dispatch(hymnsSlice.actions.setFavoriteHymnsList(getFavoriteHymnsLS()))
     dispatch(hymnsSlice.actions.getHistoryHymns())
   }, [hymns.length])
+
+
 
   return (
     <contextSettingsFont.Provider value={{ ...settingsFont, setSettingsFont }}>
@@ -58,7 +62,10 @@ function App() {
             <Route path={ROUTES.home + ROUTES.hymns + ROUTES.hymn} element={<Hymn />} />
             <Route path={ROUTES.home + ROUTES.settings} element={<Settings />} />
           </Routes>
-          {currentHymn && <Arrows />}
+          <div className={isTranposeOpen && isTextWithAccord ? 'App__footer App__footer_active' : 'App__footer'}>
+            {currentHymn && <Arrows />}
+            {isTranposeOpen && isTextWithAccord && <Transposes />}
+          </div>
         </div>
       </BrowserRouter>
     </contextSettingsFont.Provider>

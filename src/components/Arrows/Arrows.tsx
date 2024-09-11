@@ -10,7 +10,7 @@ import { ROUTES } from '../../utils/routes'
 import { useEffect } from 'react'
 
 const Arrows = () => {
-  const { currentHymn } = useAppSelector(state => state.hymnReducer)
+  const { currentHymn, hymns } = useAppSelector(state => state.hymnReducer)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -20,8 +20,8 @@ const Arrows = () => {
 
   return (
     <div className={style.arrows}>
-      <button className={style.arrows__prev} onClick={() => dispatch(hymnsSlice.actions.prevHymn())}>{'<'}</button>
-      <button className={style.arrows__next} onClick={() => dispatch(hymnsSlice.actions.nextHymn())}>{'>'}</button>
+      {currentHymn?.number !== 1 && <button className={style.arrows__prev} onClick={() => dispatch(hymnsSlice.actions.prevHymn())}>{'<'}</button>}
+      {hymns.length !== currentHymn?.number && <button className={style.arrows__next} onClick={() => dispatch(hymnsSlice.actions.nextHymn())}>{'>'}</button>}
     </div>
   )
 }
