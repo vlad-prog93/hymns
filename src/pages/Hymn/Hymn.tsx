@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 // стили
@@ -19,6 +19,7 @@ const Hymn = () => {
   const context = useContext(contextSettingsFont)
 
   const navigate = useNavigate()
+  const ref = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     !currentHymn && navigate('/')
@@ -39,8 +40,18 @@ const Hymn = () => {
     return () => document.removeEventListener('keyup', event)
   }, [navigate, dispatch])
 
+
+  useEffect(() => {
+    const isNeedToScroll = ref?.current && window.innerHeight - 50 <= ref?.current?.offsetHeight
+    if (isNeedToScroll) {
+      dispatch(hymnsSlice.actions.showAutoScroll())
+    } else {
+      dispatch(hymnsSlice.actions.hideAutoScroll())
+    }
+  }, [isTextWithAccord, currentHymn])
+
   return (
-    <div className={style.hymn}>
+    <div ref={ref} className={style.hymn}>
       {!isTextWithAccord
         ?
         currentHymn && Object.keys(currentHymn.text).map((key) => {

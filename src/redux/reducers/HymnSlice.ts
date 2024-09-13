@@ -12,6 +12,8 @@ interface HymnState {
   isTranposeOpen: boolean,
   isLoading: boolean,
   error: null | string,
+  isShowAutoScroll: boolean,
+  isScroll: boolean
 }
 
 const initialState: HymnState = {
@@ -24,6 +26,8 @@ const initialState: HymnState = {
   isTranposeOpen: false,
   isLoading: false,
   error: null,
+  isShowAutoScroll: false,
+  isScroll: false
 }
 
 export const hymnsSlice = createSlice({
@@ -143,6 +147,22 @@ export const hymnsSlice = createSlice({
         state.historyHymns.push(action.payload)
         setHistoryHymnLS(action.payload)
       }
+    },
+
+    showAutoScroll(state) {
+      state.isShowAutoScroll = true
+    },
+
+    hideAutoScroll(state) {
+      state.isShowAutoScroll = false
+    },
+
+    onScroll(state) {
+      state.isScroll = true
+    },
+
+    offScroll(state) {
+      state.isScroll = false
     }
   }
 })

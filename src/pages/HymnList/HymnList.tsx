@@ -25,10 +25,6 @@ const HymnList = ({ list, isLoading, title }: IHymnListProps) => {
 
   const dispatch = useAppDispatch()
 
-  // useEffect(() => {
-  //   dispatch(hymnsSlice.actions.deleteCurrentHymn())
-  // }, [])
-
   return (
     <div className={style.hymnList}>
       <h2 className={style.hymnList__title}>{title}</h2>
@@ -46,7 +42,6 @@ const HymnList = ({ list, isLoading, title }: IHymnListProps) => {
           })}
         </ul>
       }
-
     </div>
   )
 }

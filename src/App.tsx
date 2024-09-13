@@ -32,9 +32,10 @@ import { Transpose } from "./models/hymns"
 import { ISettingsFont } from './models/settingsFont'
 import Transposes from './components/Transposes/Transposes';
 import Popup from './components/Popup/Popup';
+import ButtonScroll from './components/ButtonScroll/ButtonScroll';
 
 function App() {
-  const { hymns, isLoading, error, favoriteHymns, foundedHymns, currentHymn, historyHymns, isTranposeOpen, isTextWithAccord } = useAppSelector(state => state.hymnReducer)
+  const { hymns, isLoading, error, favoriteHymns, foundedHymns, currentHymn, historyHymns, isTranposeOpen, isTextWithAccord, isShowAutoScroll } = useAppSelector(state => state.hymnReducer)
   const dispatch = useAppDispatch()
 
   const [settingsFont, setSettingsFont] = useState<ISettingsFont>(stateSettingsFont)
@@ -52,6 +53,7 @@ function App() {
 
       <BrowserRouter>
         {error && <Popup />}
+        {isShowAutoScroll && <ButtonScroll />}
         <Menu />
         <Header />
         <div className='App' >

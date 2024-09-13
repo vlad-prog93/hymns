@@ -66,3 +66,7 @@ li {
 .App__footer_active {
   background-color: rgba(200, 200, 200, 0.8);
 }
+
+.App__button-scroll {
+  position: absolute;
+}
