@@ -53,10 +53,10 @@ function App() {
 
       <BrowserRouter>
         {error && <Popup />}
-        {isShowAutoScroll && <ButtonScroll />}
         <Menu />
         <Header />
         <div className='App' >
+          {isShowAutoScroll && <ButtonScroll />}
           <Routes>
             <Route path={ROUTES.home} element={<Search />} />
             <Route path={ROUTES.home + ROUTES.foundedHymns} element={<HymnList title='Найденные гимны' isLoading={isLoading} list={foundedHymns} />} />
