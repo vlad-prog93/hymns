@@ -56,7 +56,9 @@ function App() {
         <Menu />
         <Header />
         <div className='App' >
-          {isShowAutoScroll && <ButtonScroll />}
+          <div className={isTranposeOpen && isTextWithAccord ? 'App__header App__header_active' : 'App__header'}>
+            {isShowAutoScroll && <ButtonScroll />}
+          </div>
           <Routes>
             <Route path={ROUTES.home} element={<Search />} />
             <Route path={ROUTES.home + ROUTES.foundedHymns} element={<HymnList title='Найденные гимны' isLoading={isLoading} list={foundedHymns} />} />

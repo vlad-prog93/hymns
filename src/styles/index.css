@@ -54,6 +54,18 @@ li {
   justify-content: space-between;
 }
 
+.App__header {
+  position: sticky;
+  width: 100%;
+  top: 50px;
+  left: 0;
+
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .App__footer {
   position: sticky;
   bottom: 0;
