@@ -16,41 +16,27 @@ const ButtonScroll = () => {
   }, [])
 
   const handleScroll = () => {
-    if (isScroll) {
-      intervalId && clearInterval(intervalId)
-      setIntervalId(null)
-      dispatch(hymnsSlice.actions.offScroll())
-    }
-    else {
+    if (!isScroll) {
       const toScroll = setInterval(scroll, 50)
       setIntervalId(toScroll)
       dispatch(hymnsSlice.actions.onScroll())
     }
   }
 
+  const stopScroll = () => {
+    if (isScroll) {
+      intervalId && clearInterval(intervalId)
+      setIntervalId(null)
+      dispatch(hymnsSlice.actions.offScroll())
+    }
+  }
 
-
-
-
-
-  // useEffect(() => {
-  //   console.log(isScroll)
-
-  //   const toScroll = setInterval(scroll, 50)
-
-  //   // console.log(toScroll)
-  //   // !isScroll && clearInterval(toScroll)
-
-  //   // return (() => {
-  //   //   clearInterval(toScroll)
-  //   //   dispatch(hymnsSlice.actions.offScroll())
-  //   //   console.log('scroll off 2')
-
-  //   // })
-  // }, [isScroll])
 
   return (
-    <button className={style.buttonScroll} onClick={() => handleScroll()}>&darr;</button>
+    <div className={style.buttonContainer}>
+      <button className={style.buttonScroll} onClick={() => stopScroll()}>S</button>
+      <button className={style.buttonScroll} onClick={() => handleScroll()}>&darr;</button>
+    </div>
   )
 }
 
