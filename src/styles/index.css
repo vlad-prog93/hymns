@@ -46,7 +46,7 @@ li {
   width: 100%;
   max-width: 1280px;
 
-  min-height: calc(100vh - 50px);
+  min-height: 100vh;
   height: 100%;
 
   display: flex;
@@ -55,15 +55,15 @@ li {
 }
 
 .App__header {
-  position: sticky;
-  width: 100%;
+  position: absolute;
+  height: 100%;
   top: 50px;
-  left: 0;
+  right: 0;
 
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  gap: 20px;
 }
 
 .App__footer {
