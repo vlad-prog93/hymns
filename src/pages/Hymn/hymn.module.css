@@ -8,9 +8,14 @@
   text-wrap: wrap;
 }
 
+.hymn__title {
+  text-align: center;
+  margin: 10px auto 0;
+}
+
 .hymn__textContainer {
   display: flex;
-  margin: 0;
+  margin: 20px 0 0 0;
   padding: 0;
 }
 

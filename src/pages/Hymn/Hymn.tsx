@@ -55,6 +55,7 @@ const Hymn = () => {
 
   return (
     <div ref={ref} className={style.hymn}>
+      <h3 className={style.hymn__title}>{currentHymn?.collection}</h3>
       {!isTextWithAccord
         ?
         currentHymn && Object.keys(currentHymn.text).map((key) => {
