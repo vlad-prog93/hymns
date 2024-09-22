@@ -57,20 +57,28 @@ const Hymn = () => {
         currentHymn && Object.keys(currentHymn.text).map((key) => {
           if (key.endsWith(' verse')) {
             return (
-              <pre
-                key={v4()}
-                className={style.hymn__text}
-                style={{ fontSize: context.fontSizeText, color: context.colorText }}>
-                {key.replace(/ verse/g, '. ')}{currentHymn.text[key].replace(/\n/g, '\n   ')}
-              </pre>)
+              <p className={style.hymn__textContainer}>
+                <pre>
+                  {key.replace(/ verse/g, '. ')}
+                </pre>
+                <pre
+                  key={v4()}
+                  className={style.hymn__text}
+                  style={{ fontSize: context.fontSizeText, color: context.colorText }}>
+                  {currentHymn.text[key].replace(/\n/g, '\n')}
+                </pre>
+              </p>)
           } else {
             return (
-              <pre
-                key={v4()}
-                className={style.hymn__text}
-                style={{ fontSize: context.fontSizeText, color: context.colorText }}>
-                {'   '}{currentHymn.text[key].replace(/\n/g, '\n   ')}
-              </pre>
+              <p className={style.hymn__textContainer}>
+                <pre>{'   '}</pre>
+                <pre
+                  key={v4()}
+                  className={style.hymn__text}
+                  style={{ fontSize: context.fontSizeText, color: context.colorText }}>
+                  {currentHymn.text[key].replace(/\n/g, '\n')}
+                </pre>
+              </p>
             )
           }
         })
@@ -78,15 +86,22 @@ const Hymn = () => {
         currentHymn && Object.keys(currentHymn.text_with_accords).map((key) => {
           const text = key.endsWith(' verse') ? key.replace(/ verse/g, '. ') + currentHymn.text_with_accords[key] : '   ' + currentHymn.text_with_accords[key]
           return (
-            <pre
-              key={v4()}
-              className={style.hymn__str_text}
-              style={{ fontSize: context.fontSizeText, color: context.colorText }}
-              dangerouslySetInnerHTML={{
-                __html: text.replace(/{[^\}]*\}/g, (v): any => {
-                  return `<span class=${style.hymn__str_accord} style="font-size:${context.fontSizeAccord}; color: ${context.colorAccord}" >${v.slice(1, v.length - 1)}</span>`
-                }).replace(/\n/g, '\n   ')
-              }} />)
+            <p className={style.hymn__textContainer}>
+              <pre className={style.hymn__numberText}>
+                <pre style={{ fontSize: context.fontSizeText, margin: 0, }}> </pre>
+                <pre style={{ fontSize: context.fontSizeText, margin: 0, marginTop: '3px' }}>{text.slice(0, 3)}</pre>
+              </pre>
+              <pre
+                key={v4()}
+                className={style.hymn__str_text}
+                style={{ fontSize: context.fontSizeText, color: context.colorText }}
+                dangerouslySetInnerHTML={{
+                  __html: text.slice(3).replace(/{[^\}]*\}/g, (v): any => {
+                    return `<span class=${style.hymn__str_accord} style="font-size:${context.fontSizeAccord}; color: ${context.colorAccord}" >${v.slice(1, v.length - 1)}</span>`
+                  })
+                }} />
+            </p>
+          )
         })
       }
     </div>

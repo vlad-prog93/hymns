@@ -8,6 +8,12 @@
   text-wrap: wrap;
 }
 
+.hymn__textContainer {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
 .hymn__text {
   font-size: 10px;
   text-wrap: wrap;
@@ -28,4 +34,8 @@
   font-weight: 700;
   color: rgb(241, 196, 15);
   text-wrap: wrap;
+}
+
+.hymn__numberText {
+  /* padding-top: 20px; */
 }
