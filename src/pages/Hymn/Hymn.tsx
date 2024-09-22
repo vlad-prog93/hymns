@@ -48,6 +48,9 @@ const Hymn = () => {
     } else {
       dispatch(hymnsSlice.actions.hideAutoScroll())
     }
+    return (() => {
+      dispatch(hymnsSlice.actions.hideAutoScroll())
+    })
   }, [isTextWithAccord, currentHymn])
 
   return (

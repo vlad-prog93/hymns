@@ -56,7 +56,7 @@ function App() {
         <Menu />
         <Header />
         <div className='App' >
-          <div className={isTranposeOpen && isTextWithAccord ? 'App__header App__header_active' : 'App__header'}>
+          <div className='App__header'>
             {isShowAutoScroll && <ButtonScroll />}
           </div>
           <Routes>
