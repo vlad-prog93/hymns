@@ -9,6 +9,9 @@ import { hymnsSlice } from '../../redux/reducers/HymnSlice'
 import { ROUTES } from '../../utils/routes'
 import { useEffect } from 'react'
 
+// components
+import MyButton from '../MyButton/MyButton'
+
 const Arrows = () => {
   const { currentHymn, hymns } = useAppSelector(state => state.hymnReducer)
   const dispatch = useAppDispatch()
@@ -20,8 +23,8 @@ const Arrows = () => {
 
   return (
     <div className={style.arrows}>
-      {currentHymn?.number !== 1 && <button className={style.arrows__prev} onClick={() => dispatch(hymnsSlice.actions.prevHymn())}>{'<'}</button>}
-      {hymns.length !== currentHymn?.number && <button className={style.arrows__next} onClick={() => dispatch(hymnsSlice.actions.nextHymn())}>{'>'}</button>}
+      {currentHymn?.number !== 1 && <MyButton onClick={() => dispatch(hymnsSlice.actions.prevHymn())}>{'<'}</MyButton>}
+      {hymns.length !== currentHymn?.number && <MyButton onClick={() => dispatch(hymnsSlice.actions.nextHymn())}>{'>'}</MyButton>}
     </div>
   )
 }

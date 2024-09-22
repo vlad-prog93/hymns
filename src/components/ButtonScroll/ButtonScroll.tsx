@@ -3,6 +3,7 @@ import style from './ButtonScroll.module.css'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { hymnsSlice } from '../../redux/reducers/HymnSlice'
 import { SPEED_CONFIG } from '../../utils/const'
+import MyButton from '../MyButton/MyButton'
 
 
 const ButtonScroll = () => {
@@ -45,9 +46,8 @@ const ButtonScroll = () => {
 
   return (
     <div className={style.buttonContainer}>
-      <button className={style.buttonScroll} onClick={() => stopScroll()}>S</button>
-      <p>{speed}</p>
-      <button className={style.buttonScroll} onClick={() => handleScroll()}>&darr;</button>
+      <MyButton onClick={() => stopScroll()}>S</MyButton>
+      <MyButton onClick={() => handleScroll()}>&darr;</MyButton>
     </div>
   )
 }

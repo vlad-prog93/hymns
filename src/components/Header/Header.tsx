@@ -14,6 +14,9 @@ import { hymnsSlice } from "../../redux/reducers/HymnSlice"
 import { Link } from "react-router-dom"
 import { ROUTES } from "../../utils/routes"
 
+//components
+import Transposes from "../Transposes/Transposes"
+
 function Header() {
   const { currentHymn, isTextWithAccord, favoriteHymns, isTranposeOpen } = useAppSelector(state => state.hymnReducer)
   const dispatch = useAppDispatch()
@@ -61,6 +64,7 @@ function Header() {
                   type="checkbox"
                   onChange={() => dispatch(hymnsSlice.actions.toggleTranposeMenu(!isTranposeOpen))} />
                 <span className={`${style.header__itemSpan} ${style.header__itemSpanTranspose}`} />
+                {currentHymn && isTranposeOpen && isTextWithAccord && <Transposes />}
 
               </li>}
             <li className={style.header__item}>

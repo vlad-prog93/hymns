@@ -57,7 +57,6 @@ function App() {
         <Header />
         <div className='App' >
           <div className={isTranposeOpen && isTextWithAccord ? 'App__header App__header_active' : 'App__header'}>
-            {currentHymn && isTranposeOpen && isTextWithAccord && <Transposes />}
             {isShowAutoScroll && <ButtonScroll />}
           </div>
           <Routes>
@@ -69,9 +68,8 @@ function App() {
             <Route path={ROUTES.home + ROUTES.hymns + ROUTES.hymn} element={<Hymn />} />
             <Route path={ROUTES.home + ROUTES.settings} element={<Settings />} />
           </Routes>
-          <div className={isTranposeOpen && isTextWithAccord ? 'App__footer App__footer_active' : 'App__footer'}>
+          <div className='App__footer'>
             {currentHymn && <Arrows />}
-
           </div>
         </div>
       </BrowserRouter>

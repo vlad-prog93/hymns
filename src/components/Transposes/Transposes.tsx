@@ -8,6 +8,9 @@ import { hymnsSlice } from '../../redux/reducers/HymnSlice'
 //models
 import { Transpose } from '../../models/hymns'
 
+// components
+import MyButton from '../MyButton/MyButton'
+
 
 const Transposes = () => {
   const { currentHymn } = useAppSelector(state => state.hymnReducer)
@@ -34,8 +37,8 @@ const Transposes = () => {
   }
   return (
     <div className={style.transpose}>
-      <button className={style.transpose_btn} onClick={() => transposeAccords(Transpose.UP)}>+</button>
-      <button className={style.transpose_btn} onClick={() => transposeAccords(Transpose.DOWN)}>-</button>
+      <MyButton style={{ color: '#FFF', width: '30px' }} onClick={() => transposeAccords(Transpose.UP)}>+</MyButton>
+      <MyButton style={{ color: '#FFF', width: '30px' }} onClick={() => transposeAccords(Transpose.DOWN)}>-</MyButton>
     </div>
   )
 }
