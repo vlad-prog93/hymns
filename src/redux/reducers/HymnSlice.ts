@@ -144,7 +144,7 @@ export const hymnsSlice = createSlice({
       }
       const isAlreadyOpened = state.historyHymns.find(historyHymn => historyHymn.id === action.payload.id)
       if (!isAlreadyOpened) {
-        state.historyHymns.push(action.payload)
+        state.historyHymns.unshift(action.payload)
         setHistoryHymnLS(action.payload)
       }
     },
