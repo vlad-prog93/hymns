@@ -62,11 +62,10 @@ const Hymn = () => {
           if (key.endsWith(' verse')) {
             return (
               <p key={v4()} className={style.hymn__textContainer}>
-                <pre>
+                <pre style={{ fontSize: context.fontSizeText, margin: 0 }} className={style.hymn__text}>
                   {key.replace(/ verse/g, '. ')}
                 </pre>
                 <pre
-
                   className={style.hymn__text}
                   style={{ fontSize: context.fontSizeText, color: context.colorText }}>
                   {currentHymn.text[key].replace(/\n/g, '\n')}
@@ -90,9 +89,8 @@ const Hymn = () => {
           const text = key.endsWith(' verse') ? key.replace(/ verse/g, '. ') + currentHymn.text_with_accords[key] : '   ' + currentHymn.text_with_accords[key]
           return (
             <p key={v4()} className={style.hymn__textContainer}>
-              <pre className={style.hymn__numberText}>
-                <pre style={{ fontSize: context.fontSizeText, margin: 0, }}> </pre>
-                <pre style={{ fontSize: context.fontSizeText, margin: 0, marginTop: '3px' }}>{text.slice(0, 3)}</pre>
+              <pre style={{ fontSize: context.fontSizeText, margin: 0 }} className={style.hymn__str_text}>
+                {text.slice(0, 3)}
               </pre>
               <pre
                 className={style.hymn__str_text}
@@ -106,7 +104,7 @@ const Hymn = () => {
           )
         })
       }
-    </div>
+    </div >
   )
 }
 

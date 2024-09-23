@@ -15,7 +15,6 @@
 
 .hymn__textContainer {
   display: flex;
-  margin: 20px 0 0 0;
   padding: 0;
 }
 
@@ -25,7 +24,6 @@
 }
 
 .hymn__str_text {
-  margin: 20px 0;
   line-height: 40px;
   font-size: var(--font-size-text);
   text-wrap: wrap;
