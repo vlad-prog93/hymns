@@ -1,10 +1,33 @@
-.setting {}
-
-.setting__fontSize {
+.setting {
   display: flex;
   flex-direction: column;
+  padding: 0 10px;
+  gap: 10px;
 }
 
-.setting__fontSize span {
-  margin: 20px auto;
+.setting__fontContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 5px;
+  padding: 5px 0;
+
+}
+
+.setting__title {
+  text-align: center;
+  font-weight: 500;
+  font-size: 25px;
+}
+
+.setting__text {
+  margin: 0;
+  padding: 5px 0;
+}
+
+.setting__range {
+  width: 80%;
 }

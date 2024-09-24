@@ -62,12 +62,12 @@ const Hymn = () => {
           if (key.endsWith(' verse')) {
             return (
               <p key={v4()} className={style.hymn__textContainer}>
-                <pre style={{ fontSize: context.fontSizeText, margin: 0 }} className={style.hymn__text}>
+                <pre style={{ fontSize: context.fontSizeText + 'px', margin: 0 }} className={style.hymn__text}>
                   {key.replace(/ verse/g, '. ')}
                 </pre>
                 <pre
                   className={style.hymn__text}
-                  style={{ fontSize: context.fontSizeText, color: context.colorText }}>
+                  style={{ fontSize: context.fontSizeText + 'px', color: context.colorText }}>
                   {currentHymn.text[key].replace(/\n/g, '\n')}
                 </pre>
               </p>)
@@ -77,7 +77,7 @@ const Hymn = () => {
                 <pre>{'   '}</pre>
                 <pre
                   className={style.hymn__text}
-                  style={{ fontSize: context.fontSizeText, color: context.colorText }}>
+                  style={{ fontSize: context.fontSizeText + 'px', color: context.colorText }}>
                   {currentHymn.text[key].replace(/\n/g, '\n')}
                 </pre>
               </p>
@@ -89,15 +89,15 @@ const Hymn = () => {
           const text = key.endsWith(' verse') ? key.replace(/ verse/g, '. ') + currentHymn.text_with_accords[key] : '   ' + currentHymn.text_with_accords[key]
           return (
             <p key={v4()} className={style.hymn__textContainer}>
-              <pre style={{ fontSize: context.fontSizeText, margin: 0 }} className={style.hymn__str_text}>
+              <pre style={{ fontSize: context.fontSizeText + 'px', margin: 0 }} className={style.hymn__str_text}>
                 {text.slice(0, 3)}
               </pre>
               <pre
                 className={style.hymn__str_text}
-                style={{ fontSize: context.fontSizeText, color: context.colorText }}
+                style={{ fontSize: context.fontSizeText + 'px', color: context.colorText }}
                 dangerouslySetInnerHTML={{
                   __html: text.slice(3).replace(/{[^\}]*\}/g, (v): any => {
-                    return `<span class=${style.hymn__str_accord} style="font-size:${context.fontSizeAccord}; color: ${context.colorAccord}" >${v.slice(1, v.length - 1)}</span>`
+                    return `<span class=${style.hymn__str_accord} style="font-size:${context.fontSizeAccord + 'px'}; color: ${context.colorAccord}" >${v.slice(1, v.length - 1)}</span>`
                   })
                 }} />
             </p>
