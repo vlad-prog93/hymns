@@ -13,33 +13,71 @@ const Settings = () => {
     e.target.name === 'colorAccord' && context.setSettingsFont({ ...context, colorAccord: e.target.value })
   }
 
-  useEffect(() => {
-  }, [])
-
   return (
     <div className={style.setting}>
       <h3 className={style.setting__title}>Настройки</h3>
       <div className={style.setting__fontContent}>
-        <span className={style.setting__text} style={{ fontSize: context.fontSizeText + 'px' }}>Размер шрифта текста: {context.fontSizeText}</span>
-        <input className={style.setting__range} name='fontText' defaultValue={context.fontSizeText} onChange={(e) => handleChangeFontSize(e)} type="range" min="10" max="24" />
+        <span
+          className={style.setting__text}
+          style={{ fontSize: context.fontSizeText + 'px' }}>
+          Размер шрифта текста: {context.fontSizeText}
+        </span>
+        <input
+          className={style.setting__range}
+          name='fontText'
+          value={context.fontSizeText}
+          onChange={(e) => handleChangeFontSize(e)}
+          type="range"
+          min="10"
+          max="24" />
       </div>
 
       <div className={style.setting__fontContent}>
-        <span className={style.setting__text} style={{ color: context.colorText + 'px' }}>Цвет текста</span>
-        <input className={style.setting__color} defaultValue={context.colorText} name='colorText' onChangeCapture={(e) => handleChangeFontSize(e)} type="color" />
+        <span
+          className={style.setting__text}
+          style={{ color: context.colorText }}>
+          Цвет текста
+        </span>
+        <input
+          className={style.setting__color}
+          value={context.colorText}
+          name='colorText'
+          onChange={(e) => handleChangeFontSize(e)}
+          type="color" />
       </div>
 
       <div className={style.setting__fontContent}>
-        <span className={style.setting__text} style={{ fontSize: context.fontSizeAccord }}>Размер шрифта аккордов: {context.fontSizeAccord}</span>
-        <input className={style.setting__range} name='fontAccord' defaultValue={context.fontSizeAccord} onChange={(e) => handleChangeFontSize(e)} type="range" min="10" max="24" />
+        <span
+          className={style.setting__text}
+          style={{ fontSize: context.fontSizeAccord + 'px' }}>
+          Размер шрифта аккордов: {context.fontSizeAccord}
+        </span>
+        <input
+          className={style.setting__range}
+          name='fontAccord'
+          value={context.fontSizeAccord}
+          onChange={(e) => handleChangeFontSize(e)}
+          type="range"
+          min="10"
+          max="24" />
       </div>
 
       <div className={style.setting__fontContent}>
-        <span className={style.setting__text} style={{ color: context.colorAccord }}>Цвет текста</span>
-        <input className={style.setting__color} defaultValue={context.colorAccord} name='colorAccord' onChangeCapture={(e) => handleChangeFontSize(e)} type="color" />
+        <span
+          className={style.setting__text}
+          style={{ color: context.colorAccord }}>
+          Цвет текста
+
+        </span>
+        <input
+          className={style.setting__color}
+          value={context.colorAccord}
+          name='colorAccord'
+          onChange={(e) => handleChangeFontSize(e)}
+          type="color" />
       </div>
 
-      <button onClick={() => context.setSettingsFont({ ...stateSettingsFont })} > По умолчанию</button>
+      <button onClick={() => context.setSettingsFont({ ...stateSettingsFont })}> По умолчанию</button>
 
     </div >
   )
