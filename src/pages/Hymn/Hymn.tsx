@@ -98,7 +98,7 @@ const Hymn = () => {
                 dangerouslySetInnerHTML={{
                   __html: text.slice(3).replace(/{[^\}]*\}/g, (v): any => {
                     return `<span class=${style.hymn__str_accord} style="font-size:${context.fontSizeAccord + 'px'}; color: ${context.colorAccord}" >${v.slice(1, v.length - 1)}</span>`
-                  })
+                  }).replace(/\n/g, '    \n')
                 }} />
             </p>
           )
