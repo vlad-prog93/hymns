@@ -11,6 +11,7 @@ import Menu from './components/Menu/Menu';
 import HymnList from './pages/HymnList/HymnList';
 import Hymn from './pages/Hymn/Hymn';
 import Arrows from './components/Arrows/Arrows';
+import Admin from './pages/Admin/Admin';
 
 // redux
 import { useAppDispatch, useAppSelector } from './redux/hooks';
@@ -67,6 +68,7 @@ function App() {
             <Route path={ROUTES.home + ROUTES.history} element={<HymnList title='История' isLoading={isLoading} list={historyHymns} />} />
             <Route path={ROUTES.home + ROUTES.hymns + ROUTES.hymn} element={<Hymn />} />
             <Route path={ROUTES.home + ROUTES.settings} element={<Settings />} />
+            <Route path={ROUTES.home + ROUTES.admin} element={<Admin />} />
           </Routes>
           <div className='App__footer'>
             {currentHymn && <Arrows />}

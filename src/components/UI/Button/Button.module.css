@@ -1,0 +1,29 @@
+.button {
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: var(--font-color-light);
+  background-color: var(--border-color-active);
+
+  cursor: pointer;
+  transition: .3s all;
+}
+
+@media screen and (max-width: 525px) {
+  .search__button {
+    font-size: 14px;
+  }
+}
+
+.button:hover {
+  background-color: #313131;
+  color: var(--active-color);
+}
+
+.button:disabled {
+  background-color: grey;
+  cursor: auto;
+  color: var(--font-color-light);
+}

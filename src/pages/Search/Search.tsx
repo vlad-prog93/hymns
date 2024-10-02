@@ -14,6 +14,9 @@ import { IHymn } from '../../models/hymns'
 // utils
 import { ROUTES } from '../../utils/routes'
 
+// components
+import Button from '../../components/UI/Button/Button'
+
 
 const Search = () => {
   const { hymns } = useAppSelector(state => state.hymnReducer)
@@ -91,9 +94,8 @@ const Search = () => {
           className={style.search__input}
           type="text"
           placeholder='Поиск по строке' />
-        <button
+        <Button
           disabled={!inputNumber && !inputText}
-          className={style.search__button}
           children='Поиск' />
       </form>
     </div>

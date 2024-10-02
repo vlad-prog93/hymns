@@ -36,33 +36,3 @@
   border: 1px solid var(--border-color-active);
   box-shadow: 0 0 1px 1px var(--active-color);
 }
-
-.search__button {
-  height: 30px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  text-transform: uppercase;
-  color: var(--font-color-light);
-  background-color: var(--border-color-active);
-
-  cursor: pointer;
-  transition: .3s all;
-}
-
-@media screen and (max-width: 525px) {
-  .search__button {
-    font-size: 14px;
-  }
-}
-
-.search__button:hover {
-  background-color: #313131;
-  color: var(--active-color);
-}
-
-.search__button:disabled {
-  background-color: grey;
-  cursor: auto;
-  color: var(--font-color-light);
-}
