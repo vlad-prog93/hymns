@@ -149,6 +149,11 @@ export const hymnsSlice = createSlice({
       }
     },
 
+    deleteHymn(state, action: PayloadAction<string>) {
+      console.log(action.payload)
+      state.hymns = state.hymns.filter(hymn => hymn._id !== action.payload)
+    },
+
     showAutoScroll(state) {
       state.isShowAutoScroll = true
     },

@@ -12,7 +12,15 @@ export const toFetchHymns = async (dispatch: AppDispatch) => {
     dispatch(hymnsSlice.actions.sortHymns())
 
   } catch (error) {
-    // dispatch(hymnsSlice.actions.hymnsFetchingError(error))
     console.log(error)
   }
-} 
+}
+
+export const toDeleteHymn = async (dispatch: AppDispatch, id: string) => {
+  try {
+    const { data } = await axios.delete<IHymn>('http://localhost:5000/api/hymns', { data: { _id: id } })
+    dispatch(hymnsSlice.actions.deleteHymn(data._id))
+  } catch (error) {
+    console.log(error)
+  }
+}
