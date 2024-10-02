@@ -27,11 +27,11 @@ function Header() {
       return null
     }
 
-    const isAlreadyFavorite = favoriteHymns.find(hymn => hymn.id === currentHymn.id)
+    const isAlreadyFavorite = favoriteHymns.find(hymn => hymn._id === currentHymn._id)
     if (isAlreadyFavorite) {
-      dispatch(hymnsSlice.actions.deleteFavoriteHymn(currentHymn.id))
+      dispatch(hymnsSlice.actions.deleteFavoriteHymn(currentHymn._id))
     } else {
-      dispatch(hymnsSlice.actions.setFavoriteHymn(currentHymn.id))
+      dispatch(hymnsSlice.actions.setFavoriteHymn(currentHymn._id))
     }
   }
 
@@ -44,7 +44,7 @@ function Header() {
     if (!currentHymn) {
       return false
     }
-    return !!favoriteHymns.find(hymn => hymn.id === currentHymn.id)
+    return !!favoriteHymns.find(hymn => hymn._id === currentHymn._id)
   }
 
   return (
@@ -52,7 +52,7 @@ function Header() {
       <nav className={style.header__nav}>
         <ul className={style.header__list}>
           <li className={style.header__item}><Burger /></li>
-          <li className={style.header__item}><span>{currentHymn ? <Link className={style.header__link} to={ROUTES.home + ROUTES.hymns + currentHymn.id}>Гимн {currentHymn.number}</Link> : 'Гимны'}</span></li>
+          <li className={style.header__item}><span>{currentHymn ? <Link className={style.header__link} to={ROUTES.home + ROUTES.hymns + currentHymn._id}>Гимн {currentHymn.number}</Link> : 'Гимны'}</span></li>
         </ul>
         {currentHymn &&
           <ul className={style.header__list}>

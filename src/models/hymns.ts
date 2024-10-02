@@ -3,7 +3,7 @@ export interface IHymnText {
 }
 
 export interface IHymn {
-  id: string,
+  _id: string,
   number: number,
   collection: string,
   shortText: string,

@@ -76,7 +76,7 @@ export const hymnsSlice = createSlice({
 
       action.payload.forEach(ID => {
         state.hymns.forEach(hymn => {
-          if (hymn.id === ID) {
+          if (hymn._id === ID) {
             far.push(hymn)
           }
         })
@@ -86,12 +86,12 @@ export const hymnsSlice = createSlice({
 
     setFavoriteHymn(state, action: PayloadAction<string>) {
       setFavoriteHymnLS(action.payload)
-      state.favoriteHymns.push(...state.hymns.filter(hymn => hymn.id === action.payload))
+      state.favoriteHymns.push(...state.hymns.filter(hymn => hymn._id === action.payload))
     },
 
     deleteFavoriteHymn(state, action: PayloadAction<string>) {
       deleteFavoriteHymnLS(action.payload)
-      state.favoriteHymns = state.favoriteHymns.filter(hymn => hymn.id !== action.payload)
+      state.favoriteHymns = state.favoriteHymns.filter(hymn => hymn._id !== action.payload)
     },
 
     // сортировка гимнов
@@ -142,7 +142,7 @@ export const hymnsSlice = createSlice({
         deleteHistoryHymnLS()
         state.historyHymns = state.historyHymns.splice(1, state.historyHymns.length - 1)
       }
-      const isAlreadyOpened = state.historyHymns.find(historyHymn => historyHymn.id === action.payload.id)
+      const isAlreadyOpened = state.historyHymns.find(historyHymn => historyHymn._id === action.payload._id)
       if (!isAlreadyOpened) {
         state.historyHymns.unshift(action.payload)
         setHistoryHymnLS(action.payload)
