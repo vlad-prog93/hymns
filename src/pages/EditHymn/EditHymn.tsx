@@ -2,13 +2,17 @@ import { useParams } from 'react-router-dom'
 import { v4 } from 'uuid'
 // styles
 import style from './EditHymn.module.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { hymnsSlice } from '../../redux/reducers/HymnSlice'
 import { IHymn } from '../../models/hymns'
+import Input from '../../components/UI/Input/Input'
+import Button from '../../components/UI/Button/Button'
 
 const EditHymn = () => {
   const params = useParams()
+  const idCol = useId()
+  const idNum = useId()
 
   const { hymns } = useAppSelector(state => state.hymnReducer)
   const [editHymn, setEditHymn] = useState<IHymn | null>()
@@ -59,31 +63,39 @@ const EditHymn = () => {
       <h4 className={style.editHymn__title}>
         Редактируемый гимн
       </h4>
-      <div className={style.editHymn__inputContainer}>
-        <label className={style.editHymn__label}>Коллекция</label>
-        <input className={style.editHymn__input} type="text" value={editHymn?.collection} />
+      <form className={style.editHymn__form}>
 
-      </div>
-      <div className={style.editHymn__inputContainer}>
-        <label className={style.editHymn__label}>Номер</label>
-        <input className={style.editHymn__input} type="text" value={editHymn?.number} />
+        <div className={style.editHymn__inputContainer}>
+          <label htmlFor={idCol} className={style.editHymn__label}>Коллекция</label>
+          <Input id={idCol} type='text' value={editHymn?.collection} />
 
-      </div>
-      {editHymn
-        &&
-        Object.keys(editHymn?.text_with_accords).map((key, index, arr) => {
-          return (
-            <div key={v4()} className={style.editHymn__inputContainer}>
-              <input type='text' value={handleTranslate(key)} />
-              <textarea
-                className={style.editHymn__textarea}
-                rows={arr.length * 4}
-              >
-                {changeViewTextHymn(editHymn.text_with_accords[key])}
-              </textarea>
-            </div >
-          )
-        })}
+        </div>
+        <div className={style.editHymn__inputContainer}>
+          <label htmlFor={idNum} className={style.editHymn__label}>Номер</label>
+          <Input id={idNum} type='text' value={editHymn?.number} />
+
+        </div>
+        {editHymn
+          &&
+          Object.keys(editHymn?.text_with_accords).map((key, index, arr) => {
+            return (
+              <div key={v4()} className={style.editHymn__inputContainer}>
+                <Input type='text' value={handleTranslate(key)} />
+                <textarea
+                  className={style.editHymn__textarea}
+                  rows={arr.length}
+                >
+                  {changeViewTextHymn(editHymn.text_with_accords[key])}
+                </textarea>
+                <div>
+                  <Button children='Редактировать' />
+                  <Button children='Удалить' />
+                </div>
+              </div >
+            )
+          })}
+
+      </form>
 
     </section>
   )

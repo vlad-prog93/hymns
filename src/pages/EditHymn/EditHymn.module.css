@@ -6,7 +6,11 @@
   min-width: 50%;
 }
 
-
+.editHymn__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
 .editHymn__inputContainer {
   display: flex;
