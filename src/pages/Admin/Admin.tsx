@@ -3,13 +3,22 @@ import Button from '../../components/UI/Button/Button'
 import { useAppSelector } from '../../redux/hooks'
 import { useDispatch } from 'react-redux'
 import { toDeleteHymn } from '../../redux/reducers/ActionCreator'
+import { useNavigate } from 'react-router-dom'
 
 const Admin = () => {
+  const navigate = useNavigate()
+
   const { hymns } = useAppSelector(state => state.hymnReducer)
   const dispatch = useDispatch()
 
+
+
   const handleDelete = (id: string) => {
     toDeleteHymn(dispatch, id)
+  }
+
+  const handleEdit = (id: string) => {
+    navigate(`hymns/${id}`)
   }
 
   return (
@@ -24,7 +33,7 @@ const Admin = () => {
           return (<li className={style.admin__item} key={hymn._id}>
             <span className={style.admin__number}>{hymn.number} - </span>
             <span className={style.admin__text}>{hymn.shortText}</span>
-            <button>Редактировать</button>
+            <button onClick={() => handleEdit(hymn._id)}>Редактировать</button>
             <button onClick={() => handleDelete(hymn._id)}>Удалить</button>
           </li>)
         })}

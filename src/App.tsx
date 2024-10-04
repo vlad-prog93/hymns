@@ -12,6 +12,7 @@ import HymnList from './pages/HymnList/HymnList';
 import Hymn from './pages/Hymn/Hymn';
 import Arrows from './components/Arrows/Arrows';
 import Admin from './pages/Admin/Admin';
+import EditHymn from './pages/EditHymn/EditHymn';
 
 // redux
 import { useAppDispatch, useAppSelector } from './redux/hooks';
@@ -29,9 +30,7 @@ import { getFavoriteHymnsLS } from './tools/storage';
 import Settings from './pages/Settings/Setting';
 
 // models
-import { Transpose } from "./models/hymns"
 import { ISettingsFont } from './models/settingsFont'
-import Transposes from './components/Transposes/Transposes';
 import Popup from './components/Popup/Popup';
 import ButtonScroll from './components/ButtonScroll/ButtonScroll';
 
@@ -69,6 +68,7 @@ function App() {
             <Route path={ROUTES.home + ROUTES.hymns + ROUTES.hymn} element={<Hymn />} />
             <Route path={ROUTES.home + ROUTES.settings} element={<Settings />} />
             <Route path={ROUTES.home + ROUTES.admin} element={<Admin />} />
+            <Route path={ROUTES.home + ROUTES.admin + ROUTES.hymns + ROUTES.hymn} element={<EditHymn />} />
           </Routes>
           <div className='App__footer'>
             {currentHymn && <Arrows />}

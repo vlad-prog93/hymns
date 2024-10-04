@@ -7,7 +7,7 @@ export enum ROUTES {
   history = 'history/',
   settings = 'settings/',
   sortedHymns = 'sortedhymns/',
-  admin = 'admin',
+  admin = 'admin/',
   hymn = ':id',
   api = 'api',
 }
