@@ -1,0 +1,25 @@
+.input {
+  outline: none;
+  height: 30px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  transition: .3s all;
+
+  appearance: none;
+  -moz-appearance: textfield;
+}
+
+.input::-webkit-inner-spin-button,
+.input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input:hover {
+  border: 1px solid var(--border-color-active);
+}
+
+.input:focus {
+  border: 1px solid var(--border-color-active);
+  box-shadow: 0 0 1px 1px var(--active-color);
+}

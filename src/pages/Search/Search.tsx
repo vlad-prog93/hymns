@@ -16,6 +16,7 @@ import { ROUTES } from '../../utils/routes'
 
 // components
 import Button from '../../components/UI/Button/Button'
+import Input from '../../components/UI/Input/Input'
 
 
 const Search = () => {
@@ -82,16 +83,14 @@ const Search = () => {
   return (
     <div className={style.search}>
       <form className={style.search__form} onSubmit={(e) => toSearch(e)}>
-        <input
+        <Input
           value={inputNumber ?? ''}
           onChange={(onChangeInputNumber)}
-          className={style.search__input}
           type="number"
           placeholder='Поиск по номеру' />
-        <input
+        <Input
           value={inputText}
           onChange={onChangeInputText}
-          className={style.search__input}
           type="text"
           placeholder='Поиск по строке' />
         <Button
