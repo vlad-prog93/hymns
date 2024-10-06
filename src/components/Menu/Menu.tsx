@@ -16,12 +16,12 @@ const Menu = () => {
   const { isMenuActive } = useAppSelector(state => state.menuReducer)
   const dispatch = useAppDispatch()
 
-  function hideMenu() {
+  function hideMenu(e: any) {
     dispatch(menuSlice.actions.toogleMenuActive(!isMenuActive))
   }
 
   return (
-    <div className={isMenuActive ? style.menu + ' ' + style.menu_active : style.menu} onClick={hideMenu} >
+    <div id='container' className={isMenuActive ? style.menu + ' ' + style.menu_active : style.menu} onClick={hideMenu} >
       <div className={style.menu__contain}>
         <ul className={style.menu__list}>
           <MenuItem link={ROUTES.home} text='Поиск' />

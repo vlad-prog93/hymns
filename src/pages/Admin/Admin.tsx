@@ -26,8 +26,6 @@ const Admin = () => {
 
       <h3 className={style.admin__title}>Выберите действие</h3>
       <Button children='Создать гимн' />
-      <Button children='Удалить гимн' />
-      <Button children='Отредактировать гимн' />
       <ul className={style.admin__list}>
         {hymns.map(hymn => {
           return (<li className={style.admin__item} key={hymn._id}>
