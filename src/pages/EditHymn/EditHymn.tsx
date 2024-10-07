@@ -8,6 +8,7 @@ import { hymnsSlice } from '../../redux/reducers/HymnSlice'
 import { IHymn } from '../../models/hymns'
 import Input from '../../components/UI/Input/Input'
 import Button from '../../components/UI/Button/Button'
+import { toUpdateHymn } from '../../redux/reducers/ActionCreator'
 
 const EditHymn = () => {
   const params = useParams()
@@ -58,7 +59,6 @@ const EditHymn = () => {
           text_accords[Number(key)] = obj[key]
         }
 
-
         let text_accords_long: any = []
         for (let i of text_accords) {
           if (!i) {
@@ -70,20 +70,24 @@ const EditHymn = () => {
         text_accords_long = text_accords_long.join('')
         let text_without_accords_long = text_without_accords
 
-        const quantityAddSpaceInEndStr = text_accords_long.length - text_without_accords_long.length
-        console.log(text_accords_long.length, text_without_accords_long.length)
+        let quantityAddSpaceInEndStr = text_accords_long.length - text_without_accords_long.length
 
         if (quantityAddSpaceInEndStr < 0) {
-          text_accords_long.padEnd(quantityAddSpaceInEndStr, 'W')
+          let space = ''
+          while (quantityAddSpaceInEndStr !== 0) {
+            space += ' '
+            quantityAddSpaceInEndStr += 1
+          }
+          text_accords_long = text_accords_long + space
         }
         if (quantityAddSpaceInEndStr > 0) {
-          text_without_accords_long = text_without_accords_long.padEnd(quantityAddSpaceInEndStr, 'W')
-
+          let space = ''
+          while (quantityAddSpaceInEndStr !== 0) {
+            space += ' '
+            quantityAddSpaceInEndStr -= 1
+          }
+          text_without_accords_long = text_without_accords_long + space
         }
-        // text_accords_long = Array.from(text_accords_long, el => !el ? ' ' : el)
-        console.log(text_accords_long.length, text_without_accords_long.length)
-        // console.log(text_without_accords_long)
-        // console.log(text_accords_long)
 
         return text_accords_long + '\n' + text_without_accords_long
       })
@@ -112,6 +116,7 @@ const EditHymn = () => {
       const arr = arrAccords.map((str, iStr) => {
         let resultTextStr = ''
         let shift = 1
+
         str.split('').forEach((accord, indAccord, arrayStr) => {
           if (shift !== 1) {
             shift -= 1
@@ -134,11 +139,8 @@ const EditHymn = () => {
         return resultTextStr
       })
 
-      // console.log(arrAccords)
-      // console.log(arrTexts)
-      console.log(arr)
+      result[key] = arr.join('\n')
     })
-
 
     return result
   }
@@ -146,16 +148,18 @@ const EditHymn = () => {
   const deleteAccords = (obj: { [key: string]: string }): { [key: string]: string } => {
     const result = { ...obj }
     Object.keys(result).forEach((key) => {
-      result[key] = result[key].replace(/{[^\}]*\}/, '')
+      result[key] = result[key].replace(/{[^\}]*\}/g, '')
     })
     return result
   }
 
-  const saveHymn = () => {
+  const saveHymn = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     if (editHymn) {
       const hymn: IHymn = { ...editHymn, text_with_accords: moveAccordsInText(editHymn.text_with_accords) }
-      // hymn.text = deleteAccords(hymn.text_with_accords),
-      // console.log(hymn)
+      hymn.text = deleteAccords(hymn.text_with_accords)
+      toUpdateHymn(dispatch, hymn)
+      navigate('/admin')
     }
   }
 
@@ -164,7 +168,7 @@ const EditHymn = () => {
       <h4 className={style.editHymn__title}>
         Редактируемый гимн
       </h4>
-      <form className={style.editHymn__form} onSubmit={e => e.preventDefault()}>
+      <form className={style.editHymn__form} onSubmit={(e) => saveHymn(e)}>
 
         {editHymn &&
           <>
@@ -206,7 +210,7 @@ const EditHymn = () => {
             })}
           </>
         }
-        <Button children='Сохранить' onClick={saveHymn} />
+        <Button children='Сохранить' />
 
       </form>
 

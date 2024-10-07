@@ -24,3 +24,12 @@ export const toDeleteHymn = async (dispatch: AppDispatch, id: string) => {
     console.log(error)
   }
 }
+
+export const toUpdateHymn = async (dispatch: AppDispatch, hymn: IHymn) => {
+  try {
+    const { data } = await axios.patch<IHymn>('http://localhost:5000/api/hymns', { ...hymn })
+    dispatch(hymnsSlice.actions.updateHymn(data))
+  } catch (error) {
+    console.log(error)
+  }
+}

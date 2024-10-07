@@ -150,8 +150,16 @@ export const hymnsSlice = createSlice({
     },
 
     deleteHymn(state, action: PayloadAction<string>) {
-      console.log(action.payload)
       state.hymns = state.hymns.filter(hymn => hymn._id !== action.payload)
+    },
+
+    updateHymn(state, action: PayloadAction<IHymn>) {
+      state.hymns = state.hymns.map(hymn => {
+        if (hymn._id === action.payload._id) {
+          return action.payload
+        }
+        return hymn
+      })
     },
 
     showAutoScroll(state) {
