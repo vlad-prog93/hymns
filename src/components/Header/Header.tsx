@@ -28,9 +28,9 @@ function Header() {
     }
 
     const isAlreadyFavorite = favoriteHymns.find(hymn => hymn._id === currentHymn._id)
-    if (isAlreadyFavorite) {
+    if (isAlreadyFavorite && currentHymn._id) {
       dispatch(hymnsSlice.actions.deleteFavoriteHymn(currentHymn._id))
-    } else {
+    } else if (currentHymn._id) {
       dispatch(hymnsSlice.actions.setFavoriteHymn(currentHymn._id))
     }
   }

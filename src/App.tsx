@@ -33,6 +33,7 @@ import Settings from './pages/Settings/Setting';
 import { ISettingsFont } from './models/settingsFont'
 import Popup from './components/Popup/Popup';
 import ButtonScroll from './components/ButtonScroll/ButtonScroll';
+import NewHymn from './pages/NewHymn/NewHymn';
 
 function App() {
   const { hymns, isLoading, error, favoriteHymns, foundedHymns, currentHymn, historyHymns, isTranposeOpen, isTextWithAccord, isShowAutoScroll } = useAppSelector(state => state.hymnReducer)
@@ -69,6 +70,7 @@ function App() {
             <Route path={ROUTES.home + ROUTES.settings} element={<Settings />} />
             <Route path={ROUTES.home + ROUTES.admin} element={<Admin />} />
             <Route path={ROUTES.home + ROUTES.admin + ROUTES.hymns + ROUTES.hymn} element={<EditHymn />} />
+            <Route path={ROUTES.home + ROUTES.admin + ROUTES.hymns + ROUTES.newHymn} element={<NewHymn />} />
           </Routes>
           <div className='App__footer'>
             {currentHymn && <Arrows />}

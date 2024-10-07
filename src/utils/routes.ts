@@ -9,5 +9,6 @@ export enum ROUTES {
   sortedHymns = 'sortedhymns/',
   admin = 'admin/',
   hymn = ':id',
+  newHymn = 'newhymn',
   api = 'api',
 }

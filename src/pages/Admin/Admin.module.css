@@ -13,12 +13,38 @@
   margin: 20px 0 10px;
 }
 
+.admin__link {
+  text-decoration: none;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  align-self: start;
+  padding: 10px;
+  color: #000;
+  transition: .3s ease-in-out;
+}
+
+.admin__link:hover {
+  border: 1px solid var(--border-color-active);
+}
+
+.admin__button {
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 10px;
+  color: #000;
+  transition: .3s ease-in-out;
+  cursor: pointer;
+}
+
+.admin__button:hover {
+  border: 1px solid var(--border-color-active);
+}
+
 .admin__list {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 10px;
-  padding: 0 10px;
 
 }
 
@@ -26,6 +52,9 @@
   display: flex;
   gap: 5px;
   align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .admin__text {

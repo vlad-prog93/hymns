@@ -1,0 +1,49 @@
+.newHymn {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 10px;
+  margin: 0 auto;
+}
+
+.newHymn__link {
+  margin-top: 10px;
+  align-self: start;
+  text-decoration: none;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  color: var(--font-color-dark);
+
+  transition: .3s ease-in-out;
+}
+
+.newHymn__link:hover {
+  border-color: var(--border-color-active);
+}
+
+.newHymn__title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 500;
+  margin: 20px 0 10px;
+}
+
+.newHymn__list {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.newHymn__button {
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  background-color: inherit;
+  cursor: pointer;
+  padding: 5px;
+  transition: .3s ease-in;
+}
+
+.newHymn__button:hover {
+  background-color: var(--border-color);
+}
