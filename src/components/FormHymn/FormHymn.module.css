@@ -1,0 +1,17 @@
+.formHymn__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formHymn__inputContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.formHymn__textarea {
+    font-family: monospace;
+    white-space-collapse: pre-wrap;
+    white-space: pre-wrap;
+    font-size: 20px;
+}

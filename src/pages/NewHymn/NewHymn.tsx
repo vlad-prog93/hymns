@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react'
 import { IHymn } from '../../models/hymns'
 import Input from '../../components/UI/Input/Input'
 import { handleTranslate } from '../../tools/workWithTextHymns'
+import Button from '../../components/UI/Button/Button'
+import FormHymn from '../../components/FormHymn/FormHymn'
 
 const NewHymn = () => {
   const [newHymn, setNewHymn] = useState<IHymn>()
@@ -18,22 +20,20 @@ const NewHymn = () => {
     !newHymn && setNewHymn({ number: 0, collection: ' ', shortText: ' ', text: { ' ': ' ' }, text_with_accords: { [(quantityVerse + 1).toString() + ' verse']: ' ' } })
   }
   const AddChorus = () => {
-    setQuantityChorus((quantityChorus) => { return quantityVerse + 1 })
-
     newHymn && setNewHymn({ ...newHymn, collection: ' ', shortText: ' ', text: { ' ': ' ' }, text_with_accords: { ...newHymn.text_with_accords, [(quantityVerse).toString() + ' chorus']: ' ' } })
     !newHymn && setNewHymn({ number: 0, collection: ' ', shortText: ' ', text: { ' ': ' ' }, text_with_accords: { [(quantityVerse).toString() + ' chorus']: ' ' } })
-
-
   }
   const AddBridge = () => {
     setQuantityBridge(prev => prev + 1)
     newHymn && setNewHymn({ ...newHymn, collection: ' ', shortText: ' ', text: { ' ': ' ' }, text_with_accords: { ...newHymn.text_with_accords, [(quantityVerse).toString() + ' verse ' + (quantityBridge).toString() + ' bridge']: ' ' } })
     !newHymn && setNewHymn({ number: 0, collection: ' ', shortText: ' ', text: { ' ': ' ' }, text_with_accords: { [(quantityVerse).toString() + ' verse ' + (quantityBridge).toString() + ' bridge']: ' ' } })
-
   }
-  useEffect(() => {
-    console.log(newHymn)
-  })
+
+
+
+  const saveHymn = (e: React.FormEvent<HTMLFormElement>) => {
+    console.log(e)
+  }
 
   return (
     <section className={style.newHymn}>
@@ -51,23 +51,7 @@ const NewHymn = () => {
         </li>
       </ul>
 
-      {newHymn && Object.keys(newHymn?.text_with_accords).map((key, index, arr) => {
-        return (
-          <div key={key} className={style.newHymn__inputContainer}>
-            <Input
-              type='text'
-              defaultValue={handleTranslate(key)}
-            />
-            <textarea
-              name={key}
-              className={style.newHymn__textarea}
-              rows={{ ...newHymn }.text_with_accords[key].split('\n').length}
-              value={newHymn.text_with_accords[key]}
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setNewHymn({ ...newHymn, text_with_accords: { ...newHymn.text_with_accords, [e.target.name]: e.target.value } })}
-            />
-          </div >
-        )
-      })}
+      {newHymn && <FormHymn hymn={newHymn} setHymn={setNewHymn} saveHymn={saveHymn} />}
 
     </section>
   )
