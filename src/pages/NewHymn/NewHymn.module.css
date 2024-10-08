@@ -47,3 +47,15 @@
 .newHymn__button:hover {
   background-color: var(--border-color);
 }
+
+.newHymn__inputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.newHymn__textarea {
+  font-family: monospace;
+  white-space-collapse: pre-wrap;
+  white-space: pre-wrap;
+  font-size: 20px;
+}
