@@ -1,4 +1,4 @@
-import { useEffect, useId } from 'react'
+import { createRef, useEffect, useId, useRef } from 'react'
 import style from './FormHymn.module.css'
 import Input from '../UI/Input/Input'
 import Button from '../UI/Button/Button'
@@ -14,6 +14,7 @@ interface IFormHymnProps {
 const FormHymn = ({ hymn, setHymn, saveHymn }: IFormHymnProps) => {
     const idCol = useId()
     const idNum = useId()
+    const refs: any = useRef(Object.keys(hymn.text_with_accords).map(() => createRef()))
 
     const handleDeleteFragment = (key: string) => {
         if (hymn) {
@@ -45,7 +46,6 @@ const FormHymn = ({ hymn, setHymn, saveHymn }: IFormHymnProps) => {
                             .split('\n')
                             .map((el, ind) => arrAccordsVerse[ind] + '\n' + el)
                             .join('\n')
-                    console.log(text_with_accords)
                     TEXT_WITH_ACCORDS[key] = text_with_accords
                 }
                 if (key.endsWith(' chorus') && key !== '1 chorus') {
@@ -90,6 +90,7 @@ const FormHymn = ({ hymn, setHymn, saveHymn }: IFormHymnProps) => {
                         <Input
                             type='text'
                             defaultValue={handleTranslate(key)}
+                            ref={refs[index]}
                         />
                         <textarea
                             name={key}

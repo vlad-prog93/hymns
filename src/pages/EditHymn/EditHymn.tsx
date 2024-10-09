@@ -20,7 +20,6 @@ const EditHymn = () => {
   useEffect(() => {
     const hymn: IHymn | undefined = hymns.find(hymn => hymn._id === params.id)
     if (hymn) {
-
       setEditHymn({ ...hymn, text_with_accords: changeViewTextHymn(hymn.text_with_accords) })
     } else {
       navigate('/')

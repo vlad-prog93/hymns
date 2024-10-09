@@ -4,7 +4,7 @@ import style from './NewHymn.module.css'
 import { useEffect, useState } from 'react'
 import { IHymn } from '../../models/hymns'
 import Input from '../../components/UI/Input/Input'
-import { handleTranslate } from '../../tools/workWithTextHymns'
+import { changeViewTextHymn, deleteAccords, handleTranslate, moveAccordsInText } from '../../tools/workWithTextHymns'
 import Button from '../../components/UI/Button/Button'
 import FormHymn from '../../components/FormHymn/FormHymn'
 
@@ -32,8 +32,19 @@ const NewHymn = () => {
 
   const saveHymn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(newHymn)
+
+    if (newHymn) {
+      const hymn: IHymn = { ...newHymn, text_with_accords: changeViewTextHymn(newHymn.text_with_accords) }
+      hymn.text = deleteAccords(hymn.text_with_accords)
+      setNewHymn({ ...hymn })
+      // toUpdateHymn(dispatch, hymn)
+      // navigate('/admin')
+    }
   }
+
+  useEffect(() => {
+    console.log(newHymn)
+  })
 
   return (
     <section className={style.newHymn}>

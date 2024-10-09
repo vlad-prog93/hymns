@@ -121,3 +121,50 @@ export const deleteAccords = (obj: { [key: string]: string }): { [key: string]: 
   })
   return result
 }
+
+
+// balanceStr ---- уравнять по длине строчки   --- дано СТРОКА: "   G       C\nБог мудро являет\n"    нужно получить строку: "   G       C   \nБог мудро являет\n" 
+// AccordDown ---- спустить аккорды вниз       --- дано: СТРОКА "   G       C\nБог мудро являет\n"    нужно получить строку: Бог{G} мудро{C} являет\n
+// DeleteAccords
+
+// AccordUP   ---- аккорды поднять наверх      --- дано: СТРОКА: "Бог{G} мудро{C} являет\n"           нужно получить строку: "   G       C\nБог мудро являет\n"
+export const AccordUP = (text: string): string => {
+
+  // 1 часть результата
+  let text_with_accord: string
+
+  // 2 часть результата
+  let text_without_accord: string
+
+  let shift = 0  // смещение аккорда
+
+  const index_and_accord: { [key: number]: string } = {} // {2: G} , где 2 - индекс на котором находится аккорд, G - сам аккорд
+
+  text_without_accord = text // сейчас цикл while будет убирать поочередно аккорды и результат №2 получим
+  while (text_without_accord.match(/{[^\}]*\}/)) {
+    text_without_accord = text_without_accord.replace(/{[^\}]*\}/, (match: string) => {
+      const accord = match.replace(/{/, '').replace(/}/, '') // пример: G, F, F#m
+      index_and_accord[text_without_accord.indexOf(match) - 1 - shift] = accord
+      shift = shift + accord.length - 1
+      return ''
+    })
+  }
+
+  // получение результата №1
+  const arr_with_accord_and_undefined: string[] | undefined[] = []
+  for (let key in index_and_accord) {
+    arr_with_accord_and_undefined[Number(key)] = index_and_accord[key]
+  }
+
+  // функцию map нельзя использовать для обхода по пустым слотам, поэтому "for of"
+  let arr_with_accord_and_string: string[] = []
+  for (let i of arr_with_accord_and_undefined) {
+    !i ? arr_with_accord_and_string.push(' ') : arr_with_accord_and_string.push(i)
+  }
+  text_with_accord = arr_with_accord_and_string.join('') + '\n'  // результат №2
+
+
+
+
+  return text_with_accord + text_without_accord
+}
