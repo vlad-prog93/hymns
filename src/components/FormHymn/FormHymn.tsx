@@ -1,4 +1,4 @@
-import { useId } from 'react'
+import { useEffect, useId } from 'react'
 import style from './FormHymn.module.css'
 import Input from '../UI/Input/Input'
 import Button from '../UI/Button/Button'
@@ -23,6 +23,46 @@ const FormHymn = ({ hymn, setHymn, saveHymn }: IFormHymnProps) => {
         }
     }
 
+    const generateAccords = () => {
+        if (hymn.text_with_accords) {
+            let arrAccordsVerse: string[] = []
+            let arrAccordsChorus: string[] = []
+            let TEXT_WITH_ACCORDS: { [key: string]: string } = {}
+            TEXT_WITH_ACCORDS['1 verse'] = hymn.text_with_accords['1 verse']
+            TEXT_WITH_ACCORDS['1 chorus'] = hymn.text_with_accords['1 chorus']
+
+            hymn.text_with_accords['1 verse']
+                .split('\n')
+                .forEach((el, ind) => ind % 2 === 0 && arrAccordsVerse.push(el))
+            hymn.text_with_accords['1 chorus']
+                .split('\n')
+                .forEach((el, ind) => ind % 2 === 0 && arrAccordsChorus.push(el))
+
+            Object.keys(hymn.text_with_accords).forEach(key => {
+                if (key.endsWith(' verse') && key !== '1 verse') {
+                    const text_with_accords =
+                        hymn.text_with_accords[key]
+                            .split('\n')
+                            .map((el, ind) => arrAccordsVerse[ind] + '\n' + el)
+                            .join('\n')
+                    console.log(text_with_accords)
+                    TEXT_WITH_ACCORDS[key] = text_with_accords
+                }
+                if (key.endsWith(' chorus') && key !== '1 chorus') {
+                    const text_with_accords =
+                        hymn.text_with_accords[key]
+                            .split('\n')
+                            .map((el, ind) => arrAccordsChorus[ind] + '\n' + el)
+                            .join('\n')
+                    TEXT_WITH_ACCORDS[key] = text_with_accords
+                }
+
+            })
+            setHymn({ ...hymn, text_with_accords: { ...TEXT_WITH_ACCORDS } })
+        }
+    }
+
+
     return (
         <form className={style.formHymn__form} onSubmit={(e) => saveHymn(e)}>
             <div className={style.formHymn__inputContainer}>
@@ -39,7 +79,7 @@ const FormHymn = ({ hymn, setHymn, saveHymn }: IFormHymnProps) => {
                 <Input
                     id={idNum}
                     type='text'
-                    value={hymn?.number}
+                    defaultValue={hymn?.number}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setHymn({ ...hymn, number: Number(e.target.value) })}
                 />
             </div>
@@ -62,6 +102,7 @@ const FormHymn = ({ hymn, setHymn, saveHymn }: IFormHymnProps) => {
                     </div >
                 )
             })}
+            <Button children='Генерировать аккорды' onClick={generateAccords} />
             <Button children='Сохранить' />
 
         </form>

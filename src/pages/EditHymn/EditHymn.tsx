@@ -2,12 +2,9 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { v4 } from 'uuid'
 // styles
 import style from './EditHymn.module.css'
-import React, { TextareaHTMLAttributes, useEffect, useId, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { hymnsSlice } from '../../redux/reducers/HymnSlice'
 import { IHymn } from '../../models/hymns'
-import Input from '../../components/UI/Input/Input'
-import Button from '../../components/UI/Button/Button'
 import { toUpdateHymn } from '../../redux/reducers/ActionCreator'
 import { handleTranslate, changeViewTextHymn, moveAccordsInText, deleteAccords } from '../../tools/workWithTextHymns'
 import FormHymn from '../../components/FormHymn/FormHymn'
@@ -15,8 +12,6 @@ import FormHymn from '../../components/FormHymn/FormHymn'
 const EditHymn = () => {
   const params = useParams()
   const navigate = useNavigate()
-  const idCol = useId()
-  const idNum = useId()
 
   const { hymns } = useAppSelector(state => state.hymnReducer)
   const [editHymn, setEditHymn] = useState<IHymn | null>()

@@ -11,7 +11,6 @@ import FormHymn from '../../components/FormHymn/FormHymn'
 const NewHymn = () => {
   const [newHymn, setNewHymn] = useState<IHymn>()
   const [quantityVerse, setQuantityVerse] = useState<number>(0)
-  const [quantityChorus, setQuantityChorus] = useState<number>(0)
   const [quantityBridge, setQuantityBridge] = useState<number>(1)
 
   const AddVerse = () => {
@@ -32,7 +31,8 @@ const NewHymn = () => {
 
 
   const saveHymn = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log(e)
+    e.preventDefault()
+    console.log(newHymn)
   }
 
   return (
