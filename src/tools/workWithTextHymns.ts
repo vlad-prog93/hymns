@@ -114,6 +114,12 @@ export const moveAccordsInText = (obj: { [key: string]: string }): { [key: strin
 }
 
 
+
+
+
+
+
+// DeleteAccords
 export const deleteAccords = (obj: { [key: string]: string }): { [key: string]: string } => {
   const result = { ...obj }
   Object.keys(result).forEach((key) => {
@@ -124,11 +130,45 @@ export const deleteAccords = (obj: { [key: string]: string }): { [key: string]: 
 
 
 // balanceStr ---- уравнять по длине строчки   --- дано СТРОКА: "   G       C\nБог мудро являет\n"    нужно получить строку: "   G       C   \nБог мудро являет\n" 
-// AccordDown ---- спустить аккорды вниз       --- дано: СТРОКА "   G       C\nБог мудро являет\n"    нужно получить строку: Бог{G} мудро{C} являет\n
-// DeleteAccords
+export const balanceStr = (text: string) => {
+  const arr_from_text = text.split('\n').map((str, index, arr) => {
 
-// AccordUP   ---- аккорды поднять наверх      --- дано: СТРОКА: "Бог{G} мудро{C} являет\n"           нужно получить строку: "   G       C\nБог мудро являет\n"
-export const AccordUP = (text: string): string => {
+    // проверяем, это строка является аккордами или нет
+    if (index % 2 === 0) {
+
+      let text_with_accord = arr[index] // строчка текста с аккордами
+      let text_without_accord = arr[index + 1] // строчка текста без аккордов
+
+      let shift = text_with_accord.length - text_without_accord.length // дельта длины строчек
+
+      if (shift < 0) {
+        while (shift < 0) {
+          text_with_accord += ' '
+          shift += 1
+        }
+      }
+      return text_with_accord
+    }
+
+    if (index % 2 === 1) {
+      let text_with_accord = arr[index - 1]
+      let text_without_accord = arr[index]
+      let shift = text_with_accord.length - text_without_accord.length
+      if (shift > 0) {
+        while (shift > 0) {
+          text_without_accord += ' '
+          shift -= 1
+        }
+      }
+      return text_without_accord
+    }
+  })
+
+  return arr_from_text.join('\n')
+}
+
+// AccordUP   ---- аккорды поднять наверх      --- дано: СТРОКА: "Бог{G} мудро{C} являет"           нужно получить строку: "   G       C\nБог мудро являет"
+export const accordUP = (text: string): string => {
 
   // 1 часть результата
   let text_with_accord: string
@@ -168,3 +208,46 @@ export const AccordUP = (text: string): string => {
 
   return text_with_accord + text_without_accord
 }
+
+// AccordDown ---- спустить аккорды вниз       --- дано: СТРОКА "   G       C\nБог мудро являет\n"    нужно получить строку: Бог{G} мудро{C} являет\n
+export const accordDown = (text: string) => {
+  const arr_from_text = balanceStr(text).split('\n')
+
+  let arr_with_accord: string[] = [] // массив строчек текста с аккордами
+  let arr_without_accord: string[] = [] // массив строчек текста без аккордов
+  let text_result: string = '' // результат
+
+  // заполняем два массива с аккордами и текстом
+  arr_from_text.forEach((el, ind) => ind % 2 ? arr_with_accord.push(el) : arr_without_accord.push(el))
+
+  // пройтись по всему тексту массивов с аккордами и без
+  for (let i = 0; i < arr_with_accord.length; i++) {
+    const text_with_accord = arr_with_accord[i]
+    const text_without_accord = arr_without_accord[i]
+
+    // пройтись по тексту строчки
+    for (let j = 0; j < text_with_accord.length; j++) {
+
+      if (text_with_accord[j] === ' ') {
+        text_result += text_without_accord[j]
+      } else {
+        let accord = text_with_accord[j]
+        let text = text_without_accord[j]
+        let shift = 1
+
+        while (text_with_accord[j + shift] !== ' ' || text_with_accord[j + shift] !== undefined) {
+          accord += text_with_accord[j + shift]
+          text += text_without_accord[j + shift]
+          shift += 1
+        }
+
+        text_result += '{' + accord + '}' + text
+        j += shift
+      }
+    }
+  }
+
+  return text_result
+}
+
+
