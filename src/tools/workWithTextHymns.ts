@@ -3,7 +3,7 @@ export const handleTranslate = (key: string): string => {
   return translatedKey
 }
 
-export const changeViewTextHymn = (obj: { [key: string]: string }) => {
+export const changeViewTextHymn = (obj: { [key: string]: string }): { [key: string]: string } => {
   const result = { ...obj }
   Object.keys(result).forEach((key) => {
 
@@ -69,45 +69,7 @@ export const moveAccordsInText = (obj: { [key: string]: string }): { [key: strin
   const result = { ...obj }
 
   Object.keys(result).forEach((key, ind) => {
-    const arrAccords: string[] = []
-    const arrTexts: string[] = []
-
-    result[key].split('\n').forEach((str, i) => {
-      if (i % 2 === 0) {
-        arrAccords.push(str)
-      } else {
-        arrTexts.push(str)
-      }
-    })
-
-
-    const arr = arrAccords.map((str, iStr) => {
-      let resultTextStr = ''
-      let shift = 1
-
-      str.split('').forEach((accord, indAccord, arrayStr) => {
-        if (shift !== 1) {
-          shift -= 1
-          if (arrTexts[iStr].split('')[indAccord]) {
-            resultTextStr += arrTexts[iStr].split('')[indAccord]
-          }
-          return
-        }
-        if (accord !== ' ') {
-          let letter = accord
-          while (/\S/.test(arrayStr[indAccord + shift]) && arrayStr[indAccord + shift]) {
-            letter += arrayStr[indAccord + shift]
-            shift += 1
-          }
-          resultTextStr = resultTextStr + arrTexts[iStr][indAccord] + '{' + letter + '}'
-          return
-        }
-        resultTextStr += arrTexts[iStr].split('')[indAccord]
-      })
-      return resultTextStr
-    })
-
-    result[key] = arr.join('\n')
+    result[key] = accordsDown(result[key])
   })
 
   return result
@@ -119,13 +81,11 @@ export const deleteAccords = (obj: { [key: string]: string }): { [key: string]: 
   Object.keys(result).forEach((key) => {
     result[key] = result[key].replace(/{[^\}]*\}/g, '')
   })
+  console.log(result)
   return result
 }
 
 
-// balanceStr ---- уравнять по длине строчки   --- дано СТРОКА: "   G       C\nБог мудро являет\n"    нужно получить строку: "   G       C   \nБог мудро являет\n" 
-// AccordDown ---- спустить аккорды вниз       --- дано: СТРОКА "   G       C\nБог мудро являет\n"    нужно получить строку: Бог{G} мудро{C} являет\n
-// DeleteAccords
 
 // AccordUP   ---- аккорды поднять наверх      --- дано: СТРОКА: "Бог{G} мудро{C} являет\n"           нужно получить строку: "   G       C\nБог мудро являет\n"
 export const AccordUP = (text: string): string => {
@@ -163,8 +123,74 @@ export const AccordUP = (text: string): string => {
   }
   text_with_accord = arr_with_accord_and_string.join('') + '\n'  // результат №2
 
-
-
-
   return text_with_accord + text_without_accord
+}
+
+// спускает аккорды вниз. работает с двумя строчками (в этой функции содержится сама логика спускания)
+// первая строчка с аккордами, вторая с текстом
+const zipper = (accords: string, text: string) => {
+
+  // из строчек делаем массивы
+  const arr_accords = accords.split('')
+  const arr_text = text.split('')
+  const result: string[] = []
+
+  // смещение в правую сторону если нашли символ аккорда 
+  let shift = 1
+
+  // итерируемся по массиву аккорда
+  // вся логика основана на смещении: есть два варианта:
+  // 1 - если смещения нет, то уменьшаем его на 1 проверяем есть ли текст в этой ячейке и добавляем текст в результат 
+  // проверяем есть ли текст на случай, если строчка аккордов больше
+  // 2 - если смещение есть, то прибавляем его и смотрим когда аккорд закончится
+  // потом его кладем в результат.
+  arr_accords.forEach((accord, index_of_accord, arr_accords) => {
+    if (shift !== 1) {
+      shift -= 1
+      if (arr_text[index_of_accord]) {
+        result.push(arr_text[index_of_accord])
+      }
+      return
+    }
+
+    if (accord !== ' ') {
+      let full_accord = accord
+
+      while ((arr_accords[index_of_accord + shift]) !== ' ' && arr_accords[index_of_accord + shift]) {
+        full_accord += arr_accords[index_of_accord + shift]
+        shift += 1
+      }
+      result.push(arr_text[index_of_accord], '{', full_accord, '}')
+      return
+    }
+    result.push(arr_text[index_of_accord])
+  })
+
+  // это на случай, если строчка аккордов закончилась, а текст еще есть
+  if (arr_accords.length < arr_text.length) {
+    result.push(...arr_text.splice(arr_accords.length))
+  }
+  return result.join('')
+
+}
+
+// спускает аккорды в текст (работа с фрагментом гимна) input: куплет или припев 
+const accordsDown = (verse: string) => {
+  const result: string[] = []
+  verse.split('\n').forEach((str, index, arr_verse) => {
+    if (index % 2 === 0) {
+      result.push(zipper(arr_verse[index], arr_verse[index + 1]))
+    }
+  })
+
+  return result.join('\n')
+}
+
+
+// balanceStr ---- уравнять по длине строчки   --- дано СТРОКА: "   G       C\nБог мудро являет\n"    нужно получить строку: "   G       C   \nБог мудро являет\n" 
+export const balanceStr = (str: string) => {
+  let text_with_accord: string
+  let text_without_accord: string
+
+
 }

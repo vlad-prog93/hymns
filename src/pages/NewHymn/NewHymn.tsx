@@ -33,12 +33,17 @@ const NewHymn = () => {
   const saveHymn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+    // if (newHymn) {
+    //   const hymn: IHymn = { ...newHymn, text_with_accords: changeViewTextHymn(newHymn.text_with_accords) }
+    //   hymn.text = deleteAccords(hymn.text_with_accords)
+    //   setNewHymn({ ...hymn })
+    //   // toUpdateHymn(dispatch, hymn)
+    //   // navigate('/admin')
+    // }
     if (newHymn) {
-      const hymn: IHymn = { ...newHymn, text_with_accords: changeViewTextHymn(newHymn.text_with_accords) }
+      const hymn: IHymn = { ...newHymn, text_with_accords: moveAccordsInText(newHymn.text_with_accords) }
       hymn.text = deleteAccords(hymn.text_with_accords)
-      setNewHymn({ ...hymn })
-      // toUpdateHymn(dispatch, hymn)
-      // navigate('/admin')
+      console.log(hymn)
     }
   }
 

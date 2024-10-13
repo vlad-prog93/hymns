@@ -29,8 +29,15 @@ const FormHymn = ({ hymn, setHymn, saveHymn }: IFormHymnProps) => {
             let arrAccordsVerse: string[] = []
             let arrAccordsChorus: string[] = []
             let TEXT_WITH_ACCORDS: { [key: string]: string } = {}
-            TEXT_WITH_ACCORDS['1 verse'] = hymn.text_with_accords['1 verse']
-            TEXT_WITH_ACCORDS['1 chorus'] = hymn.text_with_accords['1 chorus']
+
+            Object.keys(hymn.text_with_accords).forEach(key => {
+                if (key === '1 verse') {
+                    TEXT_WITH_ACCORDS['1 verse'] = hymn.text_with_accords['1 verse']
+                }
+                if (key === '1 chorus') {
+                    TEXT_WITH_ACCORDS['1 chorus'] = hymn.text_with_accords['1 chorus']
+                }
+            })
 
             hymn.text_with_accords['1 verse']
                 .split('\n')
