@@ -76,6 +76,12 @@ export const moveAccordsInText = (obj: { [key: string]: string }): { [key: strin
 }
 
 
+
+
+
+
+
+// DeleteAccords
 export const deleteAccords = (obj: { [key: string]: string }): { [key: string]: string } => {
   const result = { ...obj }
   Object.keys(result).forEach((key) => {
@@ -86,9 +92,46 @@ export const deleteAccords = (obj: { [key: string]: string }): { [key: string]: 
 }
 
 
+// balanceStr ---- уравнять по длине строчки   --- дано СТРОКА: "   G       C\nБог мудро являет\n"    нужно получить строку: "   G       C   \nБог мудро являет\n" 
+export const balanceStr = (text: string) => {
+  const arr_from_text = text.split('\n').map((str, index, arr) => {
 
-// AccordUP   ---- аккорды поднять наверх      --- дано: СТРОКА: "Бог{G} мудро{C} являет\n"           нужно получить строку: "   G       C\nБог мудро являет\n"
-export const AccordUP = (text: string): string => {
+    // проверяем, это строка является аккордами или нет
+    if (index % 2 === 0) {
+
+      let text_with_accord = arr[index] // строчка текста с аккордами
+      let text_without_accord = arr[index + 1] // строчка текста без аккордов
+
+      let shift = text_with_accord.length - text_without_accord.length // дельта длины строчек
+
+      if (shift < 0) {
+        while (shift < 0) {
+          text_with_accord += ' '
+          shift += 1
+        }
+      }
+      return text_with_accord
+    }
+
+    if (index % 2 === 1) {
+      let text_with_accord = arr[index - 1]
+      let text_without_accord = arr[index]
+      let shift = text_with_accord.length - text_without_accord.length
+      if (shift > 0) {
+        while (shift > 0) {
+          text_without_accord += ' '
+          shift -= 1
+        }
+      }
+      return text_without_accord
+    }
+  })
+
+  return arr_from_text.join('\n')
+}
+
+// AccordUP   ---- аккорды поднять наверх      --- дано: СТРОКА: "Бог{G} мудро{C} являет"           нужно получить строку: "   G       C\nБог мудро являет"
+export const accordUP = (text: string): string => {
 
   // 1 часть результата
   let text_with_accord: string
@@ -184,13 +227,4 @@ const accordsDown = (verse: string) => {
   })
 
   return result.join('\n')
-}
-
-
-// balanceStr ---- уравнять по длине строчки   --- дано СТРОКА: "   G       C\nБог мудро являет\n"    нужно получить строку: "   G       C   \nБог мудро являет\n" 
-export const balanceStr = (str: string) => {
-  let text_with_accord: string
-  let text_without_accord: string
-
-
 }
