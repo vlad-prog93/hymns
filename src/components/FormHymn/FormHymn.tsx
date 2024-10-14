@@ -3,7 +3,7 @@ import style from './FormHymn.module.css'
 import Input from '../UI/Input/Input'
 import Button from '../UI/Button/Button'
 import { IHymn } from '../../models/hymns'
-import { handleTranslate } from '../../tools/workWithTextHymns'
+import { balanceStr, handleTranslate } from '../../tools/workWithTextHymns'
 
 interface IFormHymnProps {
     hymn: IHymn,
@@ -29,40 +29,53 @@ const FormHymn = ({ hymn, setHymn, saveHymn }: IFormHymnProps) => {
             let arrAccordsVerse: string[] = []
             let arrAccordsChorus: string[] = []
             let TEXT_WITH_ACCORDS: { [key: string]: string } = {}
-            TEXT_WITH_ACCORDS['1 verse'] = hymn.text_with_accords['1 verse']
-            TEXT_WITH_ACCORDS['1 chorus'] = hymn.text_with_accords['1 chorus']
-
-            hymn.text_with_accords['1 verse']
-                .split('\n')
-                .forEach((el, ind) => ind % 2 === 0 && arrAccordsVerse.push(el))
-            hymn.text_with_accords['1 chorus']
-                .split('\n')
-                .forEach((el, ind) => ind % 2 === 0 && arrAccordsChorus.push(el))
 
             Object.keys(hymn.text_with_accords).forEach(key => {
-                if (key.endsWith(' verse') && key !== '1 verse') {
-                    const text_with_accords =
-                        hymn.text_with_accords[key]
-                            .split('\n')
-                            .map((el, ind) => arrAccordsVerse[ind] + '\n' + el)
-                            .join('\n')
-                    TEXT_WITH_ACCORDS[key] = text_with_accords
+                if (key === '1 verse') {
+                    TEXT_WITH_ACCORDS['1 verse'] = hymn.text_with_accords['1 verse']
                 }
-                if (key.endsWith(' chorus') && key !== '1 chorus') {
-                    const text_with_accords =
-                        hymn.text_with_accords[key]
-                            .split('\n')
-                            .map((el, ind) => arrAccordsChorus[ind] + '\n' + el)
-                            .join('\n')
-                    TEXT_WITH_ACCORDS[key] = text_with_accords
+                if (key === '1 chorus') {
+                    TEXT_WITH_ACCORDS['1 chorus'] = hymn.text_with_accords['1 chorus']
                 }
-
             })
-            setHymn({ ...hymn, text_with_accords: { ...TEXT_WITH_ACCORDS } })
+
+            //     hymn.text_with_accords['1 verse']
+            //         .split('\n')
+            //         .forEach((el, ind) => ind % 2 === 0 && arrAccordsVerse.push(el))
+            //     hymn.text_with_accords['1 chorus']
+            //         .split('\n')
+            //         .forEach((el, ind) => ind % 2 === 0 && arrAccordsChorus.push(el))
+
+            //     Object.keys(hymn.text_with_accords).forEach(key => {
+            //         if (key.endsWith(' verse') && key !== '1 verse') {
+            //             const text_with_accords =
+            //                 hymn.text_with_accords[key]
+            //                     .split('\n')
+            //                     .map((el, ind) => arrAccordsVerse[ind] + '\n' + el)
+            //                     .join('\n')
+            //             TEXT_WITH_ACCORDS[key] = text_with_accords
+            //         }
+            //         if (key.endsWith(' chorus') && key !== '1 chorus') {
+            //             const text_with_accords =
+            //                 hymn.text_with_accords[key]
+            //                     .split('\n')
+            //                     .map((el, ind) => arrAccordsChorus[ind] + '\n' + el)
+            //                     .join('\n')
+            //             TEXT_WITH_ACCORDS[key] = text_with_accords
+            //         }
+
+            //     })
+            //     setHymn({ ...hymn, text_with_accords: { ...TEXT_WITH_ACCORDS } })
+            // }
+            Object.keys(hymn.text_with_accords).forEach(key => {
+                console.log(hymn.text_with_accords[key].split("\n").splice(0, 2).join('\n'))
+                console.log(balanceStr(hymn.text_with_accords[key].split("\n").splice(0, 2).join('\n')))
+            })
         }
+
+
+
     }
-
-
     return (
         <form className={style.formHymn__form} onSubmit={(e) => saveHymn(e)}>
             <div className={style.formHymn__inputContainer}>
