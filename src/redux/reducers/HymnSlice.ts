@@ -162,6 +162,10 @@ export const hymnsSlice = createSlice({
       })
     },
 
+    createHymn(state, action: PayloadAction<IHymn>) {
+      state.hymns.push(action.payload)
+    },
+
     showAutoScroll(state) {
       state.isShowAutoScroll = true
     },

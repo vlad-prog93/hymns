@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../utils/routes'
 import style from './NewHymn.module.css'
 import { useEffect, useState } from 'react'
@@ -7,11 +7,16 @@ import Input from '../../components/UI/Input/Input'
 import { changeViewTextHymn, deleteAccords, handleTranslate, moveAccordsInText } from '../../tools/workWithTextHymns'
 import Button from '../../components/UI/Button/Button'
 import FormHymn from '../../components/FormHymn/FormHymn'
+import { toCreateHymn } from '../../redux/reducers/ActionCreator'
+import { useAppDispatch } from '../../redux/hooks'
 
 const NewHymn = () => {
   const [newHymn, setNewHymn] = useState<IHymn>()
   const [quantityVerse, setQuantityVerse] = useState<number>(0)
   const [quantityBridge, setQuantityBridge] = useState<number>(1)
+
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const AddVerse = () => {
     setQuantityVerse(prev => prev + 1)
@@ -33,16 +38,12 @@ const NewHymn = () => {
   const saveHymn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    // if (newHymn) {
-    //   const hymn: IHymn = { ...newHymn, text_with_accords: changeViewTextHymn(newHymn.text_with_accords) }
-    //   hymn.text = deleteAccords(hymn.text_with_accords)
-    //   setNewHymn({ ...hymn })
-    //   // toUpdateHymn(dispatch, hymn)
-    //   // navigate('/admin')
-    // }
     if (newHymn) {
       const hymn: IHymn = { ...newHymn, text_with_accords: moveAccordsInText(newHymn.text_with_accords) }
       hymn.text = deleteAccords(hymn.text_with_accords)
+      setNewHymn({ ...hymn })
+      toCreateHymn(dispatch, hymn)
+      navigate('/admin')
       console.log(hymn)
     }
   }

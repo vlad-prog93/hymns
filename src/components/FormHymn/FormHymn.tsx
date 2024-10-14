@@ -33,60 +33,38 @@ const FormHymn = ({ hymn, setHymn, saveHymn }: IFormHymnProps) => {
             Object.keys(hymn.text_with_accords).forEach(key => {
                 if (key === '1 verse') {
                     TEXT_WITH_ACCORDS['1 verse'] = hymn.text_with_accords['1 verse']
+                    hymn.text_with_accords['1 verse']
+                        .split('\n')
+                        .forEach((el, ind) => ind % 2 === 0 && arrAccordsVerse.push(el))
                 }
                 if (key === '1 chorus') {
                     TEXT_WITH_ACCORDS['1 chorus'] = hymn.text_with_accords['1 chorus']
+                    hymn.text_with_accords['1 chorus']
+                        .split('\n')
+                        .forEach((el, ind) => ind % 2 === 0 && arrAccordsChorus.push(el))
                 }
             })
-
-            hymn.text_with_accords['1 verse']
-                .split('\n')
-                .forEach((el, ind) => ind % 2 === 0 && arrAccordsVerse.push(el))
-            hymn.text_with_accords['1 chorus']
-                .split('\n')
-                .forEach((el, ind) => ind % 2 === 0 && arrAccordsChorus.push(el))
 
             Object.keys(hymn.text_with_accords).forEach(key => {
-                if (key === '1 verse') {
-                    TEXT_WITH_ACCORDS['1 verse'] = hymn.text_with_accords['1 verse']
+                if (key.endsWith(' verse') && key !== '1 verse') {
+                    const text_with_accords =
+                        hymn.text_with_accords[key]
+                            .split('\n')
+                            .map((el, ind) => arrAccordsVerse[ind] + '\n' + el)
+                            .join('\n')
+                    TEXT_WITH_ACCORDS[key] = text_with_accords
                 }
-                if (key === '1 chorus') {
-                    TEXT_WITH_ACCORDS['1 chorus'] = hymn.text_with_accords['1 chorus']
+                if (key.endsWith(' chorus') && key !== '1 chorus') {
+                    const text_with_accords =
+                        hymn.text_with_accords[key]
+                            .split('\n')
+                            .map((el, ind) => arrAccordsChorus[ind] + '\n' + el)
+                            .join('\n')
+                    TEXT_WITH_ACCORDS[key] = text_with_accords
                 }
             })
 
-            //     hymn.text_with_accords['1 verse']
-            //         .split('\n')
-            //         .forEach((el, ind) => ind % 2 === 0 && arrAccordsVerse.push(el))
-            //     hymn.text_with_accords['1 chorus']
-            //         .split('\n')
-            //         .forEach((el, ind) => ind % 2 === 0 && arrAccordsChorus.push(el))
-
-            //     Object.keys(hymn.text_with_accords).forEach(key => {
-            //         if (key.endsWith(' verse') && key !== '1 verse') {
-            //             const text_with_accords =
-            //                 hymn.text_with_accords[key]
-            //                     .split('\n')
-            //                     .map((el, ind) => arrAccordsVerse[ind] + '\n' + el)
-            //                     .join('\n')
-            //             TEXT_WITH_ACCORDS[key] = text_with_accords
-            //         }
-            //         if (key.endsWith(' chorus') && key !== '1 chorus') {
-            //             const text_with_accords =
-            //                 hymn.text_with_accords[key]
-            //                     .split('\n')
-            //                     .map((el, ind) => arrAccordsChorus[ind] + '\n' + el)
-            //                     .join('\n')
-            //             TEXT_WITH_ACCORDS[key] = text_with_accords
-            //         }
-
-            //     })
-            //     setHymn({ ...hymn, text_with_accords: { ...TEXT_WITH_ACCORDS } })
-            // }
-            Object.keys(hymn.text_with_accords).forEach(key => {
-                console.log(hymn.text_with_accords[key].split("\n").splice(0, 2).join('\n'))
-                console.log(balanceStr(hymn.text_with_accords[key].split("\n").splice(0, 2).join('\n')))
-            })
+            setHymn({ ...hymn, text_with_accords: { ...TEXT_WITH_ACCORDS } })
         }
 
 

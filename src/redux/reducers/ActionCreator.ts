@@ -33,3 +33,13 @@ export const toUpdateHymn = async (dispatch: AppDispatch, hymn: IHymn) => {
     console.log(error)
   }
 }
+
+export const toCreateHymn = async (dispatch: AppDispatch, hymn: IHymn) => {
+  try {
+    const { data } = await axios.post<IHymn>('http://localhost:5000/api/hymns', { ...hymn })
+    dispatch(hymnsSlice.actions.createHymn(data))
+
+  } catch (error) {
+    console.log(error)
+  }
+} 
