@@ -26,8 +26,7 @@ const EditHymn = () => {
     }
   }, [params])
 
-  const saveHymn = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const saveHymn = () => {
     if (editHymn) {
       const hymn: IHymn = { ...editHymn, text_with_accords: moveAccordsInText(editHymn.text_with_accords) }
       hymn.text = deleteAccords(hymn.text_with_accords)

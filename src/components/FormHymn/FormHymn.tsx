@@ -8,7 +8,7 @@ import { balanceStr, handleTranslate } from '../../tools/workWithTextHymns'
 interface IFormHymnProps {
     hymn: IHymn,
     setHymn: (obj: IHymn) => void,
-    saveHymn: (e: React.FormEvent<HTMLFormElement>) => void,
+    saveHymn: () => void,
 }
 
 const FormHymn = ({ hymn, setHymn, saveHymn }: IFormHymnProps) => {
@@ -46,7 +46,9 @@ const FormHymn = ({ hymn, setHymn, saveHymn }: IFormHymnProps) => {
             })
 
             Object.keys(hymn.text_with_accords).forEach(key => {
-                if (key.endsWith(' verse') && key !== '1 verse') {
+                if (key.endsWith(' verse')
+                    && key !== '1 verse'
+                    && hymn.text_with_accords[key].split('\n').length !== hymn.text_with_accords['1 verse'].split('\n').length) {
                     const text_with_accords =
                         hymn.text_with_accords[key]
                             .split('\n')
@@ -54,7 +56,9 @@ const FormHymn = ({ hymn, setHymn, saveHymn }: IFormHymnProps) => {
                             .join('\n')
                     TEXT_WITH_ACCORDS[key] = text_with_accords
                 }
-                if (key.endsWith(' chorus') && key !== '1 chorus') {
+                if (key.endsWith(' chorus')
+                    && key !== '1 chorus'
+                    && hymn.text_with_accords[key].split('\n').length !== hymn.text_with_accords['1 chorus'].split('\n').length) {
                     const text_with_accords =
                         hymn.text_with_accords[key]
                             .split('\n')
@@ -71,7 +75,7 @@ const FormHymn = ({ hymn, setHymn, saveHymn }: IFormHymnProps) => {
 
     }
     return (
-        <form className={style.formHymn__form} onSubmit={(e) => saveHymn(e)}>
+        <form className={style.formHymn__form} onSubmit={(e) => e.preventDefault()}>
             <div className={style.formHymn__inputContainer}>
                 <label htmlFor={idCol} className={style.formHymn__label}>Сборник</label>
                 <Input
@@ -111,7 +115,7 @@ const FormHymn = ({ hymn, setHymn, saveHymn }: IFormHymnProps) => {
                 )
             })}
             <Button children='Генерировать аккорды' onClick={generateAccords} />
-            <Button children='Сохранить' />
+            <Button children='Сохранить' onClick={() => saveHymn()} />
 
         </form>
     )
