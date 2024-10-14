@@ -39,6 +39,22 @@ const FormHymn = ({ hymn, setHymn, saveHymn }: IFormHymnProps) => {
                 }
             })
 
+            hymn.text_with_accords['1 verse']
+                .split('\n')
+                .forEach((el, ind) => ind % 2 === 0 && arrAccordsVerse.push(el))
+            hymn.text_with_accords['1 chorus']
+                .split('\n')
+                .forEach((el, ind) => ind % 2 === 0 && arrAccordsChorus.push(el))
+
+            Object.keys(hymn.text_with_accords).forEach(key => {
+                if (key === '1 verse') {
+                    TEXT_WITH_ACCORDS['1 verse'] = hymn.text_with_accords['1 verse']
+                }
+                if (key === '1 chorus') {
+                    TEXT_WITH_ACCORDS['1 chorus'] = hymn.text_with_accords['1 chorus']
+                }
+            })
+
             //     hymn.text_with_accords['1 verse']
             //         .split('\n')
             //         .forEach((el, ind) => ind % 2 === 0 && arrAccordsVerse.push(el))
