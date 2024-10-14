@@ -35,14 +35,12 @@ const Admin = () => {
       <h3 className={style.admin__title}>Выберите действие</h3>
       <div className={style.admin__buttonContainer}>
         <Link className={style.admin__link} to={ROUTES.hymns + ROUTES.newHymn} children='Создать гимн' />
-        <button className={style.admin__link} onClick={handleDownload} children='Скачать БД' />
-        <form className={style.admin__form}>
-          <label htmlFor={id_input_file}>Загрузить JSON
-
-            <input id='id_input_file' className={style.input__file} type='file' />
-
+        <button className={style.admin__link} onClick={handleDownload} children='Скачать файл из БД' />
+        <form>
+          <label className={style.input__file}>
+            <input type="file" name="file" />
+            <span>Загрузить файл в БД</span>
           </label>
-          <button className={style.admin__link} onClick={handleDownload} children='Отправить' />
         </form>
       </div>
 
