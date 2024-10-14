@@ -45,8 +45,13 @@ const Search = () => {
     let foundedHymns: IHymn[] = []
 
     if (inputNumber) {
-      hymn = hymns.find(hymn => hymn.number === inputNumber) || null
-      !hymn && dispatch(hymnsSlice.actions.setError('Гимн с таким номером не найден'))
+      foundedHymns = hymns.filter(hymn => hymn.number === inputNumber)
+      !foundedHymns.length && dispatch(hymnsSlice.actions.setError('Гимнов не найдено'))
+      if (foundedHymns.length === 1) {
+        hymn = foundedHymns[0]
+        !hymn && dispatch(hymnsSlice.actions.setError('Гимн с таким номером не найден'))
+      }
+
     }
     if (hymn) {
       dispatch(hymnsSlice.actions.setCurrentHymn(hymn))
