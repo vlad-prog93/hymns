@@ -1,16 +1,17 @@
 import style from './Admin.module.css'
 import { useAppSelector } from '../../redux/hooks'
 import { useDispatch } from 'react-redux'
-import { toDeleteHymn, toDownloadFileWithHymns } from '../../redux/reducers/ActionCreator'
+import { toDeleteHymn, toDownloadFileWithHymns, toUploadFile } from '../../redux/reducers/ActionCreator'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { ROUTES } from '../../utils/routes'
 import Button from '../../components/UI/Button/Button'
-import { useId } from 'react'
+import { useId, useRef } from 'react'
 
 const Admin = () => {
   const id_input_file = useId()
   const navigate = useNavigate()
+  const uploadRef = useRef<HTMLFormElement>(null)
 
   const { hymns } = useAppSelector(state => state.hymnReducer)
   const dispatch = useDispatch()
@@ -25,6 +26,11 @@ const Admin = () => {
     navigate(`hymns/${id}`)
   }
 
+  const uploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    e.target.files && toUploadFile(e.target.files[0])
+  }
+
   return (
     <div className={style.admin}>
 
@@ -32,9 +38,9 @@ const Admin = () => {
       <div className={style.admin__buttonContainer}>
         <Link className={style.admin__link} to={ROUTES.hymns + ROUTES.newHymn} children='Создать гимн' />
         <button className={style.admin__link} onClick={toDownloadFileWithHymns} children='Скачать файл из БД' />
-        <form>
+        <form ref={uploadRef}>
           <label className={style.input__file}>
-            <input type="file" name="file" />
+            <input type="file" name="file" onChange={(e) => uploadFile(e)} />
             <span>Загрузить файл в БД</span>
           </label>
         </form>
