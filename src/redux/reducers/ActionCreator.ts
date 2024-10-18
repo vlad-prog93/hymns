@@ -42,4 +42,23 @@ export const toCreateHymn = async (dispatch: AppDispatch, hymn: IHymn) => {
   } catch (error) {
     console.log(error)
   }
-} 
+}
+
+export const toDownloadFileWithHymns = async () => {
+  try {
+    const { data } = await axios.get<any>('http://localhost:5000/api/hymns/database', { responseType: 'blob' })
+    const url = URL.createObjectURL(data)
+    console.log(data)
+    console.log(url)
+    const a = document.createElement('a')
+    a.href = url
+    a.setAttribute('download', 'db.json')
+    a.style.display = 'none'
+    document.body.appendChild(a)
+    a.click()
+    a.remove()
+    URL.revokeObjectURL(url)
+  } catch (error) {
+    console.log(error)
+  }
+}

@@ -1,7 +1,7 @@
 import style from './Admin.module.css'
 import { useAppSelector } from '../../redux/hooks'
 import { useDispatch } from 'react-redux'
-import { toDeleteHymn } from '../../redux/reducers/ActionCreator'
+import { toDeleteHymn, toDownloadFileWithHymns } from '../../redux/reducers/ActionCreator'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { ROUTES } from '../../utils/routes'
@@ -25,17 +25,13 @@ const Admin = () => {
     navigate(`hymns/${id}`)
   }
 
-  const handleDownload = () => {
-    console.log('скачка началась')
-  }
-
   return (
     <div className={style.admin}>
 
       <h3 className={style.admin__title}>Выберите действие</h3>
       <div className={style.admin__buttonContainer}>
         <Link className={style.admin__link} to={ROUTES.hymns + ROUTES.newHymn} children='Создать гимн' />
-        <button className={style.admin__link} onClick={handleDownload} children='Скачать файл из БД' />
+        <button className={style.admin__link} onClick={toDownloadFileWithHymns} children='Скачать файл из БД' />
         <form>
           <label className={style.input__file}>
             <input type="file" name="file" />
