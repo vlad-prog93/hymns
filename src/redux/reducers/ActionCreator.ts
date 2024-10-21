@@ -48,8 +48,6 @@ export const toDownloadFileWithHymns = async () => {
   try {
     const { data } = await axios.get<any>('http://localhost:5000/api/hymns/database', { responseType: 'blob' })
     const url = URL.createObjectURL(data)
-    console.log(data)
-    console.log(url)
     const a = document.createElement('a')
     a.href = url
     a.setAttribute('download', 'db.json')
@@ -58,6 +56,20 @@ export const toDownloadFileWithHymns = async () => {
     a.click()
     a.remove()
     URL.revokeObjectURL(url)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const toUploadFile = async (file: any) => {
+  try {
+    const formData = new FormData();
+    formData.append('file', file)
+    axios.post('http://localhost:5000/api/hymns/database', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
   } catch (error) {
     console.log(error)
   }
