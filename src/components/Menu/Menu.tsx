@@ -29,6 +29,7 @@ const Menu = () => {
           <MenuItem link={ROUTES.home + ROUTES.sortedHymns} text='Содержание' />
           <MenuItem link={ROUTES.home + ROUTES.history} text='История' />
           <MenuItem link={ROUTES.home + ROUTES.settings} text='Настройки' />
+          <MenuItem link={ROUTES.home + ROUTES.admin} text='Админ' />
         </ul>
       </div>
     </div>

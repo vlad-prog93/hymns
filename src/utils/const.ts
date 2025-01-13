@@ -9,3 +9,5 @@ export const translate = {
     'bridge': 'послекуплетье',
     'chorus': 'припев',
 }
+
+export const IP_SERVER = 'http://localhost:5000'
