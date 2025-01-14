@@ -58,7 +58,7 @@ const Search = () => {
 
       const historyHymn = { ...hymn, time: Date.now() }
       dispatch(hymnsSlice.actions.addHistoryHymn(historyHymn))
-      navigate(ROUTES.hymns + '/' + hymn.number)
+      navigate(ROUTES.hymns + '/' + hymn._id)
       return
     }
     if (inputText) {
