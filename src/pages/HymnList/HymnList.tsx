@@ -35,7 +35,7 @@ const HymnList = ({ list, isLoading, title }: IHymnListProps) => {
         <ul className={style.hymnList__list}>
           {list.map(hymn => {
             return <li key={hymn._id} className={style.hymnList__Item}>
-              <Link className={style.hymnList__link} onClick={() => dispatch(hymnsSlice.actions.setCurrentHymn(hymn))} to={ROUTES.home + ROUTES.hymns + hymn._id}>
+              <Link className={style.hymnList__link} onClick={() => dispatch(hymnsSlice.actions.setCurrentHymn(hymn))} to={ROUTES.home + ROUTES.hymns + '/' + hymn._id}>
                 <span>{hymn.collection}:</span><span>{hymn.shortText}</span><span>{hymn.number}</span>
               </Link>
             </li>
