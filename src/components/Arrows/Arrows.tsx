@@ -18,7 +18,7 @@ const Arrows = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    navigate(ROUTES.home + ROUTES.hymns + currentHymn?._id)
+    navigate(ROUTES.home + ROUTES.hymns + '/' + currentHymn?._id)
   }, [currentHymn])
 
   return (

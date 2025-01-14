@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 // стили
 import './styles/index.css'
@@ -71,6 +71,8 @@ function App() {
             <Route path={ROUTES.home + ROUTES.admin} element={<Admin />} />
             <Route path={ROUTES.home + ROUTES.admin + ROUTES.hymns + ROUTES.hymn} element={<EditHymn />} />
             <Route path={ROUTES.home + ROUTES.admin + ROUTES.hymns + ROUTES.newHymn} element={<NewHymn />} />
+            <Route path="*" element={<Navigate to="" replace />}
+            />
           </Routes>
           <div className='App__footer'>
             {currentHymn && <Arrows />}

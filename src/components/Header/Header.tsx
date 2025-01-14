@@ -52,7 +52,7 @@ function Header() {
       <nav className={style.header__nav}>
         <ul className={style.header__list}>
           <li className={style.header__item}><Burger /></li>
-          <li className={style.header__item}><span>{currentHymn ? <Link className={style.header__link} to={ROUTES.home + ROUTES.hymns + currentHymn._id}>Гимн {currentHymn.number}</Link> : 'Гимны'}</span></li>
+          <li className={style.header__item}><span>{currentHymn ? <Link className={style.header__link} to={ROUTES.home + ROUTES.hymns + '/' + currentHymn._id}>Гимн {currentHymn.number}</Link> : 'Гимны'}</span></li>
         </ul>
         {currentHymn &&
           <ul className={style.header__list}>
