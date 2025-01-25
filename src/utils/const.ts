@@ -10,4 +10,4 @@ export const translate = {
     'chorus': 'припев',
 }
 
-export const IP_SERVER = 'http://localhost:5000'
+export const IP_SERVER = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000'
